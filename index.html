@@ -640,6 +640,11 @@
   body.home header:not(.solid) nav.nc::before { color: rgba(244,241,235,.95); }
   #ways .ph img { transition: transform .9s cubic-bezier(.2,.7,.2,1); }
   #ways .path:hover .ph img { transform: scale(1.04); }
+
+  /* v43: "You don't have to..." stands apart (big italic serif, like her reference) from the plain text under it */
+  .statement .two-col p.dont { font: italic 400 clamp(1.9rem, 2.8vw, 2.6rem)/1.18 var(--serif); color: var(--ink); margin-bottom: 26px; }
+  .statement .two-col p:not(.dont) { font: 400 1.05rem/1.7 "Instrument Sans", "Helvetica Neue", Arial, sans-serif; font-style: normal; color: var(--soft); max-width: 31rem; }
+  .statement .two-col p:not(.dont) + p { margin-top: 14px; }
 </style>
 </head>
 <body class="home">
@@ -688,7 +693,8 @@
     <div class="wrap two-col">
       <h2>All you need:<em>an open home</em></h2>
       <div class="txt">
-        <p>You don't have to have children. You don't have to travel. You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
+        <p class="dont">You don’t have to have children.<br>You don’t have to travel.</p>
+        <p>You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
         <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
       </div>
     </div>
