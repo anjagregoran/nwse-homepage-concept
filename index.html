@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NorthWest Student Exchange | High School Exchange Programs Since 1987</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Caveat:wght@500;600&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f6f2ea;
+    --paper: #fbf9f4;
+    --sand: #ece5d8;
+    --ink: #1e2b1b;
+    --soft: #5d6559;
+    --green: #7fa224;
+    --green-deep: #3f5a17;
+    --line: rgba(30, 43, 27, 0.14);
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --display: "Instrument Serif", "Cormorant Garamond", serif;
+    --hand: "Caveat", "Bradley Hand", cursive;
+    --gutter: clamp(16px, 4vw, 64px);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font: 400 16.5px/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; line-height: 1.02; letter-spacing: -0.01em; }
+  h1 em, h2 em { font-style: italic; color: var(--green-deep); }
+  p { margin: 0 0 1em; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+  .btn { white-space: nowrap; display: inline-flex; align-items: center; background: var(--ink); color: var(--cream); text-decoration: none; font-weight: 600; font-size: 0.92rem; letter-spacing: 0.01em; padding: 15px 28px; border-radius: 999px; transition: background .25s; }
+  .btn:hover { background: var(--green-deep); }
+  .btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .btn.line:hover { background: var(--ink); color: var(--cream); }
+  .link { font-weight: 600; font-size: 0.93rem; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .link:hover { color: var(--green-deep); }
+
+  header { position: sticky; top: 0; z-index: 20; background: rgba(246, 242, 234, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 82px; }
+  .logo img { height: 42px; width: auto; }
+  nav { display: flex; align-items: center; gap: 30px; font-size: 0.74rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+  nav a { text-decoration: none; color: var(--soft); }
+  nav a:hover { color: var(--ink); }
+  nav .btn { color: var(--cream); padding: 11px 22px; font-size: 0.86rem; }
+  .subnav { display: none; }
+
+  .hero { position: relative; padding: 0; min-height: clamp(600px, calc(100vh - 82px), 820px); display: flex; align-items: center; overflow: hidden; }
+  .hero-bg { position: absolute; top: 0; bottom: 0; right: 0; left: 31%; overflow: hidden; background: var(--cream); }
+  .hero-bg::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, var(--cream) 0%, rgba(246,242,234,.82) 12%, rgba(246,242,234,.35) 28%, rgba(246,242,234,0) 46%); }
+  .slide { position: absolute; inset: 0 0 0 4px; margin: 0; opacity: 0; transition: opacity 1.4s ease; }
+  .slide.on { opacity: 1; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.07); transition: transform 8s ease-out; }
+  .slide.on img { transform: scale(1); }
+  .hero-in { position: relative; z-index: 2; width: 100%; }
+  .hero .hero-in { max-width: none; padding-left: clamp(24px, 5vw, 88px); }
+  header .wrap.bar { max-width: none; padding-left: clamp(24px, 5vw, 88px); padding-right: clamp(24px, 4vw, 64px); }
+  .hero-copy { max-width: 570px; padding: 48px 0 56px; }
+  .eyebrow { font-size: 0.74rem; letter-spacing: .22em; text-transform: uppercase; color: var(--soft); margin: 0 0 18px; }
+  .hero h1 { font: 400 clamp(2.3rem, 4vw, 4.4rem)/1 var(--serif); letter-spacing: -0.025em; }
+  .hero h1 { white-space: nowrap; }
+  .hero h1 span { display: inline; }
+  .hero h1 em { display: inline; color: var(--green-deep); }
+  .hero .sub { font: italic 400 clamp(1.45rem, 2.2vw, 2rem)/1.2 var(--serif); color: var(--green-deep); margin: 22px 0 14px; max-width: 15em; }
+  .hero .lead { font-size: 1.06rem; color: var(--soft); max-width: 31em; margin: 0 0 30px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero .call { margin: 18px 0 0; font-size: 0.88rem; color: var(--soft); }
+  .hero .call a { color: var(--ink); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .hero { padding-bottom: 0; }
+  .hero-bg { bottom: 46px; }
+  .hero-cap { position: absolute; z-index: 2; right: clamp(24px, 4vw, 64px); bottom: 0; height: 46px; display: flex; align-items: center; margin: 0; font-size: 0.72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--soft); transition: opacity .4s; }
+  .teaser { position: absolute; z-index: 3; right: clamp(24px, 4vw, 64px); bottom: 44px; display: flex; align-items: center; gap: 14px; background: rgba(251,249,244,.95); backdrop-filter: blur(8px); border: 0; border-radius: 18px; padding: 10px 22px 10px 10px; text-align: left; cursor: pointer; color: var(--ink); font-family: var(--sans); box-shadow: 0 14px 34px rgba(18,26,16,.18); transition: opacity .4s, transform .3s; }
+  .teaser:hover { transform: translateY(-3px); }
+  .teaser img { width: 66px; height: 66px; border-radius: 12px; object-fit: cover; }
+  .teaser small { display: block; font-size: 0.66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); }
+  .teaser b { display: block; font: 500 1.35rem/1.15 var(--serif); margin: 2px 0 3px; }
+  .teaser i { font-style: normal; font-size: 0.82rem; font-weight: 600; border-bottom: 1px solid currentColor; }
+  .teaser.fade, .hero-cap.fade { opacity: 0; }
+  .hero h1, .hero .sub, .hero .lead, .hero .ctas, .hero .call, .eyebrow { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+  .hero h1 { animation-delay: .05s; } .hero .sub { animation-delay: .15s; } .hero .lead { animation-delay: .25s; } .hero .ctas { animation-delay: .35s; } .hero .call { animation-delay: .4s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+  .facts-wrap { padding-top: clamp(34px, 4vw, 52px); padding-bottom: clamp(44px, 5vw, 70px); }
+  .facts { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: left; }
+  .facts li { font-size: 0.84rem; color: var(--soft); border-left: 1px solid var(--line); padding-left: 20px; line-height: 1.45; }
+  .facts b { display: block; font: 500 1.45rem var(--serif); color: var(--ink); margin-bottom: 2px; }
+  @media (prefers-reduced-motion: reduce) { .slide img { transition: none; } .hero h1, .hero .sub, .hero .lead, .hero .ctas, .hero .call, .eyebrow { animation: none; } }
+
+  /* student filters and chips */
+  .filters { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 14px; margin: -16px 0 30px; }
+  .filters label { display: grid; gap: 6px; }
+  .filters label span { font-size: 0.72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); padding-left: 4px; }
+  .filters select { appearance: none; -webkit-appearance: none; font: 500 0.92rem var(--sans); color: var(--ink); background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231e2b1b' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center; border: 1px solid rgba(30,43,27,.18); border-radius: 999px; padding: 12px 44px 12px 18px; min-width: 190px; cursor: pointer; }
+  .filters select:hover, .filters select:focus { border-color: var(--ink); outline: none; }
+  .filters .count { margin-left: auto; font-size: 0.88rem; color: var(--soft); padding-bottom: 12px; }
+  .card.hide { display: none; }
+  .likes { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .likes li { font-size: 0.8rem; background: var(--cream); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+  .card .link { background: none; border: 0; padding: 0 0 3px; cursor: pointer; font: 600 0.92rem var(--sans); color: var(--ink); border-bottom: 1.5px solid var(--ink); }
+
+  /* profile */
+  dialog.profile { width: min(1120px, 94vw); max-height: 92vh; padding: 0; border: 0; border-radius: 26px; background: var(--paper); color: var(--ink); overflow: auto; box-shadow: 0 30px 80px rgba(18,26,16,.35); }
+  dialog.profile::backdrop { background: rgba(18,26,16,.55); backdrop-filter: blur(4px); }
+  .pf { display: grid; grid-template-columns: 0.92fr 1.08fr; }
+  .pf-media { padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; position: sticky; top: 0; align-self: start; }
+  .pf-media img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+  .pf-media img:first-child { grid-column: 1 / -1; aspect-ratio: 5 / 4; object-position: 50% 18%; }
+  .pf-body { padding: 48px 52px 40px 30px; }
+  .pf-close { position: absolute; top: 16px; right: 16px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 1.3rem; cursor: pointer; color: var(--ink); }
+  .pf .where { font: italic 400 1.1rem var(--serif); color: var(--green-deep); }
+  .pf h2 { font-size: clamp(2.8rem, 4.4vw, 4rem); margin: 4px 0 6px; }
+  .pf .sid { font-size: 0.78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); }
+  .pf-quick { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 28px; padding: 0; list-style: none; }
+  .pf-quick li { background: var(--cream); border-radius: 12px; padding: 10px 14px; font-size: 0.86rem; }
+  .pf-quick b { display: block; font-size: 0.7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); font-weight: 600; margin-bottom: 2px; }
+  .pf h4 { font: 600 0.74rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--soft); margin: 0 0 12px; }
+  .pf-loves { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 30px; }
+  .pf-loves li { background: #eef2e4; color: var(--green-deep); border-radius: 999px; padding: 9px 16px; font-weight: 600; font-size: 0.92rem; }
+  .pf-letter { background: var(--cream); border-radius: 18px; padding: 26px 28px; margin-bottom: 30px; }
+  .pf-letter p { margin: 0; color: var(--ink); font-size: 1rem; }
+  .pf-letter .hi { font: italic 400 1.5rem var(--serif); color: var(--green-deep); margin-bottom: 10px; }
+  .pf-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; margin: 0 0 30px; }
+  .pf-facts div { display: grid; grid-template-columns: 30px 1fr; gap: 4px 10px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .pf-facts .ic { font-size: 1.2rem; line-height: 1.3; grid-row: span 2; }
+  .pf-facts b { font-size: 0.72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--soft); font-weight: 600; }
+  .pf-facts span { font-size: 0.94rem; }
+  .pf-dreams { list-style: none; padding: 0; margin: 0 0 30px; }
+  .pf-dreams li { padding: 10px 0 10px 34px; position: relative; border-top: 1px solid var(--line); }
+  .pf-dreams li::before { content: "✓"; position: absolute; left: 4px; top: 9px; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: #fff; font-size: 0.7rem; display: grid; place-items: center; }
+  .pf-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+  .pf-cta span { font-size: 0.88rem; color: var(--soft); }
+  .pf-cta a.tel { color: var(--ink); font-weight: 600; text-decoration: none; }
+  .pf-nav { display: flex; justify-content: space-between; margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .pf-nav button { background: none; border: 0; font: 600 0.9rem var(--sans); color: var(--ink); cursor: pointer; padding: 6px 0; }
+
+  .statement { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; padding-top: clamp(64px, 8vw, 110px); padding-bottom: clamp(64px, 8vw, 110px); }
+  .statement p { font: 300 clamp(1.7rem, 3.4vw, 2.8rem)/1.3 var(--serif); max-width: 24em; margin: 0 auto; letter-spacing: -0.01em; }
+  .statement p em { color: var(--green-deep); }
+  .statement small { display: block; margin-top: 28px; color: var(--soft); font-size: 0.88rem; }
+
+  section { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(80px, 10vw, 140px); }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 60px; margin-bottom: clamp(40px, 5vw, 64px); }
+  .head h2 { font-size: clamp(2.5rem, 4.8vw, 4.2rem); max-width: 12em; }
+  .head p { color: var(--soft); max-width: 26em; margin: 0; }
+
+  .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); }
+  .path .ph { overflow: hidden; border-radius: 14px; margin-bottom: 26px; }
+  .path img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform .6s ease; }
+  .path:hover img { transform: scale(1.03); }
+  .path h3 { font-size: 2rem; margin-bottom: 12px; }
+  .path p { color: var(--soft); font-size: 0.97rem; margin-bottom: 18px; }
+  .path .langs { font-size: 0.88rem; color: var(--soft); margin: 16px 0 0; }
+  .path .langs a { color: var(--green-deep); }
+
+  .students { background: var(--sand); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 1100px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--paper); border-radius: 16px; padding: 14px 14px 30px; display: flex; flex-direction: column; }
+  .card > *:not(.pic) { margin-left: 18px; margin-right: 18px; }
+  .card .pic { position: relative; overflow: hidden; border-radius: 10px; margin-bottom: 24px; }
+  .card .pic img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
+  .card:hover .pic img { transform: scale(1.04); }
+  .card .pic span { position: absolute; left: 12px; bottom: 12px; background: rgba(251,249,244,.92); color: var(--ink); font-size: 0.78rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; }
+  .card .where { font: italic 400 1.05rem var(--serif); color: var(--green-deep); }
+  .card h3 { font-size: 2.6rem; margin: 6px 0 2px; }
+  .card .meta { display: block; font-size: 0.85rem; color: var(--soft); margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .card p { font-size: 0.96rem; color: var(--soft); }
+  .card .link { margin-top: auto; align-self: flex-start; }
+  .students .foot-note { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 32px; font-size: 0.9rem; color: var(--soft); }
+
+  .why { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 7vw, 120px); align-items: start; }
+  .why h2 { font-size: clamp(2.5rem, 4.8vw, 4.2rem); }
+  .why .intro { color: var(--soft); margin: 24px 0 24px; max-width: 26em; }
+  .why ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .why li { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .why li b { font: 400 1.35rem/1.2 var(--serif); }
+  .why li span { color: var(--soft); font-size: 0.96rem; }
+
+  .voices { background: var(--ink); color: var(--cream); }
+  .voices-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+  .video { position: relative; display: block; border-radius: 16px; overflow: hidden; text-decoration: none; }
+  .video img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .6s ease; }
+  .video:hover img { transform: scale(1.03); }
+  .video .play { position: absolute; inset: 0; display: grid; place-items: center; }
+  .video .play span { width: 84px; height: 84px; border-radius: 50%; background: rgba(246,242,234,.92); display: grid; place-items: center; }
+  .video .play span::before { content: ""; border-left: 20px solid var(--ink); border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px; }
+  .video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+  .video.playing { cursor: default; }
+  .video-cap { margin-top: 16px; font-size: 0.9rem; color: #c6cbbf; }
+  .video-cap a { color: var(--cream); }
+  .voices blockquote { margin: 0; font: 300 clamp(1.6rem, 2.6vw, 2.2rem)/1.35 var(--serif); }
+  .voices cite { display: block; margin-top: 24px; font: 500 0.9rem var(--sans); font-style: normal; color: #c6cbbf; }
+  .voices .link { display: inline-block; margin-top: 28px; color: var(--cream); }
+
+  .closing { text-align: center; }
+  .closing h2 { font-size: clamp(2.6rem, 5.4vw, 4.8rem); max-width: 13em; margin: 0 auto; }
+  .closing p.sub { color: var(--soft); max-width: 34em; margin: 24px auto 36px; }
+  .closing .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .more-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: clamp(64px, 8vw, 110px); text-align: left; }
+  .more-row div { border-top: 1px solid var(--ink); padding-top: 22px; }
+  .more-row h3 { font-size: 1.6rem; margin-bottom: 10px; }
+  .more-row p { color: var(--soft); font-size: 0.94rem; margin: 0 0 14px; }
+
+  footer { background: var(--paper); border-top: 1px solid var(--line); padding-top: 64px; padding-bottom: 32px; font-size: 0.9rem; color: var(--soft); }
+  .foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+  .foot img { height: 38px; margin-bottom: 18px; }
+  footer h4 { margin: 0 0 14px; color: var(--ink); font-weight: 600; font-size: 0.9rem; }
+  footer a { text-decoration: none; display: block; padding: 3px 0; }
+  footer a:hover { color: var(--ink); }
+  footer p { margin: 0 0 8px; }
+  .foot-bottom { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: 0.8rem; }
+
+  @media (max-width: 1080px) { nav { gap: 22px; } }
+  @media (max-width: 960px) {
+    nav a:not(.btn) { display: none; }
+    .logo img { height: 34px; }
+    .bar { height: 66px; }
+    .subnav { display: flex; gap: 22px; overflow-x: auto; white-space: nowrap; padding-bottom: 12px; font-size: 0.88rem; font-weight: 500; scrollbar-width: none; }
+    .subnav::-webkit-scrollbar { display: none; }
+    .subnav a { text-decoration: none; color: var(--soft); }
+    .why, .voices-grid { grid-template-columns: 1fr; }
+    .hero { display: block; min-height: 0; }
+    .hero-bg { position: relative; left: 0; bottom: auto; aspect-ratio: 4 / 3.4; }
+    .slide { inset: 0; }
+    .hero .hero-in { padding-left: var(--gutter); }
+    .hero-bg::after { background: linear-gradient(0deg, var(--cream) 0%, rgba(246,242,234,0) 30%); }
+    .hero-copy { padding: 10px 0 44px; }
+    .hero h1 { font-size: clamp(1.8rem, 8.2vw, 3.6rem); }
+    .hero-cap { position: static; height: auto; justify-content: flex-end; padding: 10px var(--gutter) 0; }
+    .teaser { right: 16px; bottom: 26px; padding: 8px 16px 8px 8px; gap: 11px; }
+    .teaser img { width: 52px; height: 52px; }
+    .teaser b { font-size: 1.15rem; }
+    .facts { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+    .facts li { padding-left: 14px; font-size: 0.78rem; }
+    .facts b { font-size: 1.2rem; }
+    .pf { grid-template-columns: 1fr; }
+    .pf-media { position: static; padding: 12px 12px 0; }
+    .pf-body { padding: 26px 22px 30px; }
+    .pf-facts { grid-template-columns: 1fr; }
+    .paths, .cards, .more-row { grid-template-columns: 1fr; }
+    .path img { aspect-ratio: 4 / 3; }
+    .why li { grid-template-columns: 1fr; gap: 6px; }
+    .foot { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .foot { grid-template-columns: 1fr; }
+    .card { padding: 12px 12px 26px; }
+    .card > *:not(.pic) { margin-left: 14px; margin-right: 14px; }
+  }
+
+  /* ===== v11: Dandelion-inspired top ===== */
+  .announce { background: var(--sand); text-align: center; font-size: 0.68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); padding: 9px 16px; }
+  .announce a { text-decoration: none; font-weight: 600; white-space: nowrap; }
+  header .wrap.bar { display: grid; grid-template-columns: 1fr auto 1fr; max-width: none; padding-left: clamp(24px, 4vw, 64px); padding-right: clamp(24px, 4vw, 64px); height: 86px; }
+  header nav.nl { justify-content: flex-start; } header nav.nr { justify-content: flex-end; }
+  header .logo img { height: 46px; }
+  .hero { display: grid; place-items: center; min-height: clamp(560px, calc(100vh - 120px), 820px); padding: 0; text-align: center; }
+  .hero-bg { left: 0; bottom: 0; }
+  .slide { inset: 0; }
+  .hero-bg::after { background: linear-gradient(180deg, rgba(20,24,16,.30) 0%, rgba(20,24,16,.42) 55%, rgba(20,24,16,.55) 100%); }
+  .hero .hero-in { max-width: none; padding: 0 var(--gutter); }
+  .hero-copy { max-width: 1000px; margin: 0 auto; padding: 70px 0 110px; }
+  .hero h1 { font: 400 clamp(3.2rem, 7.4vw, 7.2rem)/.92 var(--display); text-transform: uppercase; letter-spacing: .005em; white-space: normal; color: #fbf7ee; text-shadow: 0 2px 30px rgba(0,0,0,.18); }
+  .hero h1 span, .hero h1 em { display: block; font-style: normal; color: inherit; }
+  .hero .sub { font: 500 clamp(0.8rem, 1.1vw, 0.98rem)/1.6 var(--sans); font-style: normal; letter-spacing: .26em; text-transform: uppercase; color: #fbf7ee; margin: 28px auto 34px; max-width: none; }
+  .hero .ctas { justify-content: center; gap: 12px; }
+  .hero .btn { background: #fbf7ee; color: var(--ink); min-width: 250px; justify-content: center; font-size: 0.78rem; letter-spacing: .2em; text-transform: uppercase; padding: 16px 34px; }
+  .hero .btn:hover { background: #fff; }
+  .hero .btn.line { background: transparent; color: #fbf7ee; border: 1px solid rgba(251,247,238,.8); }
+  .hero .btn.line:hover { background: rgba(251,247,238,.12); }
+  .hero-cap { right: auto; left: clamp(24px, 4vw, 64px); bottom: 28px; height: auto; color: rgba(251,247,238,.9); }
+  .teaser { bottom: 26px; }
+  .values { list-style: none; margin: 0; padding: 22px var(--gutter); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px clamp(24px, 4vw, 60px); font-size: 0.7rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); background: var(--paper); border-bottom: 1px solid var(--line); }
+  .statement { text-align: left; background: var(--cream); border: 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px, 6vw, 90px); align-items: center; max-width: 1100px; margin: 0 auto; }
+  .two-col h2 { font: 400 clamp(2rem, 3.6vw, 3.1rem)/1.15 var(--serif); letter-spacing: .14em; text-transform: uppercase; }
+  .two-col h2 em { display: block; text-transform: none; letter-spacing: .08em; color: var(--green-deep); }
+  .two-col .txt { border-left: 1px solid var(--ink); padding-left: clamp(20px, 2.4vw, 34px); }
+  .statement .two-col p { font: italic 400 clamp(1.15rem, 1.6vw, 1.4rem)/1.55 var(--serif); max-width: none; margin: 0; letter-spacing: 0; }
+  .statement .two-col p + p { margin-top: 16px; }
+  @media (max-width: 960px) {
+    header .wrap.bar { grid-template-columns: auto 1fr; height: 66px; padding-left: var(--gutter); padding-right: var(--gutter); }
+    header nav.nl { display: none; }
+    header .logo img { height: 36px; }
+    .announce { font-size: 0.6rem; letter-spacing: .14em; }
+    .hero { display: grid; min-height: clamp(560px, 82vh, 760px); }
+    .announce .a1 { display: none; }
+    .hero-bg { position: absolute; inset: 0; aspect-ratio: auto; }
+    .hero-bg::after { background: linear-gradient(180deg, rgba(20,24,16,.32) 0%, rgba(20,24,16,.5) 100%); }
+    .hero-copy { padding: 40px 0 150px; }
+    .hero h1 { font-size: clamp(2.6rem, 12vw, 4.4rem); white-space: normal; }
+    .hero .sub { letter-spacing: .18em; }
+    .hero .btn { min-width: 0; width: 100%; max-width: 320px; }
+    .hero .ctas { flex-direction: column; align-items: center; }
+    .hero-cap { position: absolute; left: var(--gutter); right: auto; bottom: 118px; padding: 0; justify-content: flex-start; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+
+
+  /* ===== v18: full background slideshow, centered headline, My-story style link ===== */
+  ::selection { background: rgba(127,162,36,.32); color: var(--ink); }
+  .top { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 0; min-height: clamp(560px, calc(100vh - 104px), 900px); background: var(--cream); isolation: isolate; }
+  .top-bg { position: absolute; inset: -6px; z-index: -2; opacity: .8; filter: url(#chroma) saturate(.92); }
+  .top-bg .slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1.8s ease; }
+  .top-bg .slide.on { opacity: 1; }
+  .top-bg .slide img { width: 100%; height: 100%; object-fit: cover; transform: none; transition: none; }
+  .top-veil { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse 46% 40% at 50% 47%, rgba(246,242,234,.82) 0%, rgba(246,242,234,.55) 45%, rgba(246,242,234,0) 100%),
+      radial-gradient(ellipse 85% 80% at 50% 50%, rgba(20,24,16,0) 45%, rgba(20,24,16,.38) 80%, rgba(20,24,16,.66) 100%); }
+  .top-copy { position: relative; z-index: 1; text-align: center; padding: 40px var(--gutter) 120px; display: flex; flex-direction: column; align-items: center; }
+  .top-eyebrow { width: fit-content; margin: 0 0 16px; font-size: 0.72rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--green-deep); }
+  .top h1 { width: fit-content; max-width: 13.5em; margin: 0; font: 400 clamp(2.6rem, 5.2vw, 5.2rem)/1.04 var(--display); letter-spacing: -0.005em; color: var(--ink); text-wrap: balance; }
+  .top h1 .mark { position: relative; display: inline-block; white-space: nowrap; color: var(--green-deep); font-style: italic; padding: 0 .04em; }
+  .top h1 .mark svg { position: absolute; left: -2%; width: 104%; bottom: -0.16em; height: 0.3em; overflow: visible; }
+  .top h1 .mark path { fill: none; stroke: var(--green); stroke-width: 3.2; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 1.1s .5s cubic-bezier(.6,.1,.3,1) forwards; }
+  .top h1 .mark path.thin { stroke-width: 1.6; opacity: .7; animation-delay: .9s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .top-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: clamp(24px, 2.6vw, 34px); user-select: none; -webkit-user-select: none; }
+  .pill { display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 999px; text-decoration: none; font-size: 0.7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap;
+    background: rgba(63,90,23,.86); color: #fbf7ee; -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 8px 22px rgba(30,43,27,.16); transition: background .25s; }
+  .pill i { font-style: normal; font-size: 0.95rem; letter-spacing: 0; transition: transform .3s; }
+  .pill:hover { background: rgba(63,90,23,1); }
+  .pill:hover i { transform: translateX(4px); }
+  .pill.alt { background: rgba(251,247,238,.62); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(30,43,27,.2), 0 8px 22px rgba(30,43,27,.1); }
+  .pill.alt:hover { background: rgba(251,247,238,.95); }
+  .media-cap { position: absolute; z-index: 2; left: clamp(24px, 4vw, 64px); bottom: 34px; margin: 0; font-size: 0.66rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(251,247,238,.85); transition: opacity .4s; user-select: none; -webkit-user-select: none; }
+  .media-cap.fade { opacity: 0; }
+  .top .teaser { position: absolute; z-index: 2; right: clamp(24px, 4vw, 64px); bottom: 28px; }
+  /* same as "My story" on Abroad Club USA */
+  .top-sub { position: absolute; left: 0; right: 0; bottom: 92px; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 8px; width: fit-content; margin: 0 auto;
+    color: #FBF7EE; text-decoration: none; font-family: 'Instrument Sans', sans-serif; font-size: 12.5px; letter-spacing: 2.9px; text-transform: uppercase; font-weight: 500; opacity: .92; transition: .3s; text-shadow: 0 1px 14px rgba(20,24,16,.35); }
+  .top-sub:hover { opacity: 1; }
+  .top-sub i { font-style: normal; font-size: 1.2em; line-height: 0; letter-spacing: 0; transition: transform .3s; }
+  .top-sub:hover i { transform: translateY(3px); }
+  .values { border-top: 1px solid var(--line); }
+  #students { scroll-margin-top: 100px; }
+  @media (prefers-reduced-motion: reduce) { .top-bg .slide { transition: none; } .top h1 .mark path { animation: none; stroke-dashoffset: 0; } }
+  @media (max-width: 1100px) { .top .teaser { display: none; } }
+  @media (max-width: 960px) {
+    .top { min-height: clamp(520px, 78vh, 720px); }
+    .top-copy { padding: 30px var(--gutter) 110px; }
+    .top-eyebrow { font-size: 0.62rem; margin-bottom: 12px; }
+    .top h1 { font-size: clamp(2.1rem, 9vw, 3.2rem); }
+    .top-ctas { flex-direction: column; align-items: center; gap: 8px; margin-top: 22px; }
+    .pill { padding: 11px 18px; font-size: 0.62rem; letter-spacing: .16em; gap: 9px; }
+    .top-veil { background:
+      radial-gradient(ellipse 70% 42% at 50% 46%, rgba(246,242,234,.84) 0%, rgba(246,242,234,.55) 50%, rgba(246,242,234,0) 100%),
+      radial-gradient(ellipse 110% 85% at 50% 50%, rgba(20,24,16,0) 45%, rgba(20,24,16,.4) 82%, rgba(20,24,16,.66) 100%); }
+    .media-cap { display: none; }
+    .top-sub { bottom: 58px; font-size: 10.5px; letter-spacing: 1.8px; padding: 0 18px; text-align: center; line-height: 1.5; }
+    #students { scroll-margin-top: 120px; }
+    header nav .btn { padding: 9px 15px; font-size: 0.72rem; }
+  }
+
+  /* ===== v19: dark overlay, white text, NWSE green (#7fa224), no underline ===== */
+  .top { background: #141a12; }
+  .top-bg { opacity: 1; }
+  .top-veil { background:
+      radial-gradient(ellipse 52% 44% at 50% 48%, rgba(14,18,12,.42) 0%, rgba(14,18,12,.24) 60%, rgba(14,18,12,0) 100%),
+      radial-gradient(ellipse 85% 80% at 50% 50%, rgba(14,18,12,.30) 40%, rgba(14,18,12,.58) 78%, rgba(10,13,9,.82) 100%); }
+  .top-eyebrow { color: #a9cc4a; text-shadow: 0 1px 10px rgba(0,0,0,.45); }
+  .top h1 { color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.38), 0 1px 3px rgba(0,0,0,.3); }
+  .top h1 .mark { color: #7fa224; text-shadow: 0 2px 18px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.35); }
+  .pill { background: rgba(127,162,36,.9); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), 0 10px 26px rgba(0,0,0,.28); text-shadow: 0 1px 2px rgba(0,0,0,.2); }
+  .pill:hover { background: #7fa224; }
+  .pill.alt { background: rgba(255,255,255,.14); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), 0 10px 26px rgba(0,0,0,.22); }
+  .pill.alt:hover { background: rgba(255,255,255,.24); }
+  .top-sub { color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.5); }
+  .media-cap { color: rgba(255,255,255,.82); }
+  ::selection { background: rgba(127,162,36,.45); color: #fff; }
+  @media (max-width: 960px) {
+    .top-veil { background:
+      radial-gradient(ellipse 80% 46% at 50% 47%, rgba(14,18,12,.45) 0%, rgba(14,18,12,.25) 60%, rgba(14,18,12,0) 100%),
+      radial-gradient(ellipse 110% 85% at 50% 50%, rgba(14,18,12,.3) 40%, rgba(14,18,12,.58) 80%, rgba(10,13,9,.82) 100%); }
+  }
+
+  /* ===== v20: logo left, centered menu, Register right; no eyebrow; no button arrows; bigger Meet Our Students ===== */
+  header .wrap.bar { grid-template-columns: 1fr auto 1fr; }
+  header .logo { justify-self: start; }
+  header nav.nc { justify-self: center; display: flex; gap: clamp(22px, 2.4vw, 38px); }
+  header .nr { justify-self: end; display: flex; align-items: center; }
+  header .nr .btn { color: var(--cream); padding: 11px 22px; font-size: 0.74rem; text-transform: uppercase; letter-spacing: .1em; }
+  .top h1 { margin-top: 0; }
+  .pill { gap: 0; padding: 15px 30px; }
+  .top-sub { font-size: 15px; letter-spacing: 3.2px; gap: 10px; }
+  .top-sub i { font-size: 1.3em; }
+  @media (max-width: 1180px) { header nav.nc { gap: 18px; font-size: 0.64rem; } }
+  @media (max-width: 960px) {
+    header .wrap.bar { grid-template-columns: auto 1fr; }
+    header nav.nc { display: none; }
+    header .nr .btn { padding: 9px 15px; font-size: 0.72rem; }
+    .pill { padding: 12px 22px; }
+    .top-sub { font-size: 12px; letter-spacing: 2.2px; }
+  }
+
+  /* ===== v21: header button in brand green, both hero buttons glass, subtle random shine ===== */
+  header .nr .btn { background: #7fa224; color: #fff; }
+  header .nr .btn:hover { background: #6f9020; }
+  .pill, .pill.alt { background: rgba(255,255,255,.14); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), 0 10px 26px rgba(0,0,0,.22); text-shadow: 0 1px 2px rgba(0,0,0,.2); }
+  .pill:hover, .pill.alt:hover { background: rgba(255,255,255,.24); }
+  .top h1 .mark { color: transparent; text-shadow: none; padding: 0 .1em 0 .04em;
+    background-image: linear-gradient(105deg, #7fa224 0%, #7fa224 44%, #a8cf4c 48%, #d6ec9a 50%, #a8cf4c 52%, #7fa224 56%, #7fa224 100%);
+    background-size: 260% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text;
+    filter: drop-shadow(0 2px 14px rgba(0,0,0,.42)) drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+  .top h1 .mark.shine { animation: shine var(--shine-dur, 2.2s) cubic-bezier(.45,.05,.35,1) 1; }
+  @keyframes shine { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+
+  /* Lucas card centered on the same line as Meet Our Students */
+  .top .teaser { bottom: calc(92px + 13px); transform: translateY(50%); }
+  .top .teaser:hover { transform: translateY(calc(50% - 3px)); }
+
+  /* ===== v22: Register Online dropdown ===== */
+  .reg { position: relative; }
+  .reg-btn { border: 0; cursor: pointer; font-family: inherit; font-weight: 600; gap: 10px; }
+  .reg-btn svg { width: 11px; height: 8px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .25s; }
+  .reg.open .reg-btn svg { transform: rotate(180deg); }
+  .reg-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 50; min-width: 262px; padding: 8px; border-radius: 16px; background: rgba(251,249,244,.97); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    box-shadow: 0 18px 44px rgba(20,26,18,.18), inset 0 0 0 1px rgba(30,43,27,.08); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .2s, transform .2s, visibility 0s .2s; }
+  .reg.open .reg-menu { opacity: 1; visibility: visible; transform: none; transition: opacity .2s, transform .2s; }
+  .reg-menu a { display: block; padding: 12px 16px; border-radius: 10px; text-decoration: none; color: var(--ink); font-size: 0.9rem; font-weight: 500; letter-spacing: 0; text-transform: none; white-space: nowrap; }
+  .reg-menu a:hover, .reg-menu a:focus-visible { background: rgba(127,162,36,.14); color: var(--green-deep); outline: none; }
+  @media (max-width: 960px) { .reg-menu { min-width: 236px; } .reg-menu a { font-size: 0.86rem; padding: 11px 14px; } }
+
+  /* ===== v23: vertical line under Meet Our Students instead of the arrow ===== */
+  .top-sub { position: absolute; }
+  .top-sub .cue-line { position: absolute; left: calc(50% - 1.6px); top: calc(100% + 12px); width: 1px; height: 38px; margin-left: -0.5px; overflow: hidden;
+    background: rgba(255,255,255,.38); box-shadow: 0 0 8px rgba(0,0,0,.25); transition: height .35s ease; }
+  .top-sub .cue-line::after { content: ""; position: absolute; left: 0; top: -40%; width: 100%; height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0), #fff); animation: cue-drip 2.6s cubic-bezier(.6,0,.4,1) infinite; }
+  .top-sub:hover .cue-line { height: 48px; }
+  @keyframes cue-drip { 0% { top: -40%; } 70%, 100% { top: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .top-sub .cue-line::after { animation: none; display: none; } }
+  @media (max-width: 960px) { .top-sub .cue-line { top: calc(100% + 9px); height: 26px; } }
+
+  /* v25: one Learn More button; compact "Find your place" that fits one screen */
+  #ways { padding-top: clamp(36px, 4vw, 52px); padding-bottom: clamp(56px, 6vw, 88px); scroll-margin-top: 86px; }
+  #ways .head { margin-bottom: clamp(24px, 2.6vw, 34px); gap: 12px 60px; }
+  #ways .head h2 { font-size: clamp(2.3rem, 3.8vw, 3.4rem); max-width: none; }
+  #ways .head p { max-width: 24em; font-size: 0.95rem; }
+  #ways .paths { gap: clamp(18px, 2.4vw, 32px); }
+  #ways .path .ph { margin-bottom: 18px; }
+  #ways .path img { aspect-ratio: 4 / 3; }
+  #ways .path h3 { font-size: 1.6rem; margin-bottom: 8px; }
+  #ways .path p { font-size: 0.92rem; margin-bottom: 14px; }
+  #ways .path .langs { margin-top: 10px; font-size: 0.82rem; }
+  @media (max-width: 860px) {
+    #ways { padding-top: 22px; padding-bottom: 56px; scroll-margin-top: 104px; }
+    #ways .head { margin-bottom: 18px; gap: 8px; }
+    #ways .head h2 { font-size: 2.1rem; line-height: 1.05; }
+    #ways .head p { font-size: 0.88rem; }
+    #ways .paths { gap: 14px; }
+    #ways .path { display: grid; grid-template-columns: 96px 1fr; column-gap: 14px; align-items: start; }
+    #ways .path .ph { grid-row: 1 / span 4; margin: 0; border-radius: 12px; }
+    #ways .path img { aspect-ratio: 1 / 1; width: 96px; height: 96px; }
+    #ways .path h3 { font-size: 1.25rem; line-height: 1.15; margin: 0 0 4px; }
+    #ways .path p { font-size: 0.82rem; line-height: 1.45; margin: 0 0 6px; }
+    #ways .path .link { font-size: 0.82rem; justify-self: start; }
+    #ways .path .langs { margin: 6px 0 0; font-size: 0.76rem; }
+  }
+
+  /* v26: Learn More sits a little higher and reads clearly as a button */
+  .top-ctas { margin-top: clamp(16px, 1.7vw, 22px); }
+  .top-ctas .pill { background: #fbf7ee; color: var(--ink); text-shadow: none; font-size: 0.74rem; padding: 16px 34px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.32), 0 2px 6px rgba(0,0,0,.18); transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+  .top-ctas .pill:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0,0,0,.36), 0 3px 8px rgba(0,0,0,.2); }
+  .top-ctas .pill:active { transform: translateY(0); }
+  .top-ctas .pill:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+  @media (max-width: 860px) { .top-ctas { margin-top: 14px; } .top-ctas .pill { font-size: 0.68rem; padding: 13px 26px; } }
+
+  /* ===== v28: dark, full-photo hero, header over the photo ===== */
+  :root { --cream: #F4F1EB; --paper: #F8F6F1; --sand: #E9E4DA; --ink: #0B1517; --soft: #4F5D5F; --line: rgba(11,21,23,.13);
+    --display: "Instrument Serif", "Cormorant Garamond", serif;
+    --clay: #C4693B; --clay-dark: #A9552C; --deep: #0E2429; --green-deep: #A9552C; }
+  body { font-size: 16px; }
+  h1, h2, h3 { letter-spacing: -0.015em; }
+  .btn { border-radius: 2px; }
+  .path .ph, #ways .path .ph, .card, .video, .teaser, .reg-menu, dialog.profile, .pf-media img, .pf-letter { border-radius: 4px; }
+  .card .pic, .teaser img, .reg-menu a, .filters select { border-radius: 2px; }
+  .voices { background: var(--deep); }
+  .announce { display: none; }
+
+  body.home header { position: fixed; left: 0; right: 0; top: 0; transition: background .35s ease, border-color .35s ease; }
+  body.home header:not(.solid) { background: transparent; border-bottom-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  header .logo img { height: 34px; }
+  header .logo .lg-light { display: none; }
+  body.home header:not(.solid) .logo .lg-dark { display: none; }
+  body.home header:not(.solid) .logo .lg-light { display: block; }
+  body.home header:not(.solid) nav.nc a, body.home header:not(.solid) .subnav a { color: rgba(244,241,235,.86); }
+  body.home header:not(.solid) nav.nc a:hover { color: #fff; }
+  header .nr .btn { background: var(--clay); color: #F4F1EB; border-radius: 2px; }
+  header .nr .btn:hover { background: var(--clay-dark); }
+
+  body.home .top { min-height: 100svh; align-items: flex-end; justify-content: flex-start; background: var(--ink); }
+  body.home .top-bg { filter: none; opacity: 1; inset: 0; }
+  body.home .top-veil { background: linear-gradient(to top, #0B1517 0%, rgba(11,21,23,.38) 52%, rgba(11,21,23,.12) 100%), linear-gradient(to bottom, rgba(11,21,23,.55) 0%, rgba(11,21,23,0) 26%); }
+  body.home .top-copy { width: 100%; max-width: calc(78rem + 2 * var(--gutter)); margin: 0 auto; text-align: left; align-items: flex-start; padding: 0 var(--gutter) clamp(72px, 11vh, 120px); }
+  .top .eyebrow-x { margin: 0 0 20px; font: 600 0.75rem/1 var(--sans); letter-spacing: .25em; text-transform: uppercase; color: rgba(244,241,235,.72); }
+  body.home .top h1 { width: auto; max-width: 16em; text-align: left; font: 500 clamp(2.75rem, 6.4vw, 5.25rem)/1.03 var(--display); letter-spacing: -0.02em; color: #F4F1EB; text-shadow: none; }
+  body.home .top h1 .mark { color: inherit; background: none; -webkit-background-clip: border-box; background-clip: border-box; filter: none; animation: none; }
+  .top .top-lead { margin: 22px 0 0; max-width: 36rem; font: 400 1.125rem/1.625 var(--sans); color: rgba(244,241,235,.82); }
+  body.home .top-ctas { justify-content: flex-start; margin-top: 34px; gap: 14px; }
+  body.home .top .top-ctas .pill { border-radius: 2px; background: var(--clay); color: #F4F1EB; font: 500 0.78rem/1 var(--sans); letter-spacing: .12em; padding: 18px 30px; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; text-shadow: none; }
+  body.home .top .top-ctas .pill:hover { background: var(--clay-dark); transform: none; box-shadow: none; }
+  body.home .top .top-ctas .pill.alt { background: transparent; box-shadow: inset 0 0 0 1px rgba(244,241,235,.6); }
+  body.home .top .top-ctas .pill.alt:hover { background: rgba(244,241,235,.1); }
+  body.home .media-cap, body.home .top-sub { display: none; }
+  body.home .top .teaser { bottom: clamp(72px, 11vh, 120px); transform: none; }
+  @media (max-width: 960px) {
+    header .logo img { height: 28px; }
+    body.home .top-copy { padding-bottom: 52px; }
+    body.home .top h1 { font-size: clamp(2.6rem, 11vw, 3.4rem); }
+    .top .eyebrow-x { font-size: 0.68rem; margin-bottom: 14px; }
+    .top .top-lead { font-size: 1rem; margin-top: 16px; }
+    body.home .top-ctas { flex-direction: row; flex-wrap: wrap; margin-top: 26px; gap: 10px; }
+    body.home .top .top-ctas .pill { padding: 15px 20px; font-size: 0.7rem; letter-spacing: .1em; }
+  }
+
+  /* ===== v29: our own look, not theirs: NWSE green, Instrument fonts, centered copy, our photos ===== */
+  :root { --serif: "Cormorant Garamond", "Times New Roman", serif; --display: "Instrument Serif", "Cormorant Garamond", serif; --sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --green-deep: #3f5a17; --clay: #7fa224; --clay-dark: #6f9020;
+    --cream: #f6f2ea; --paper: #fbf9f4; --sand: #ece5d8; --ink: #1e2b1b; --soft: #5d6559; --line: rgba(30,43,27,.14); --deep: #1e2b1b; }
+  body { font-size: 16.5px; }
+  body.home .top { background: #141a12; }
+  body.home .top-veil { background: linear-gradient(to top, rgba(14,20,12,.92) 0%, rgba(14,20,12,.45) 45%, rgba(14,20,12,.3) 100%), radial-gradient(ellipse at center, rgba(14,20,12,.35) 0%, rgba(14,20,12,0) 70%), linear-gradient(to bottom, rgba(14,20,12,.55) 0%, rgba(14,20,12,0) 26%); }
+  header .nr .btn { background: #7fa224; }
+  header .nr .btn:hover { background: #6f9020; }
+  body.home .top-copy { text-align: center; align-items: center; padding-bottom: clamp(170px, 22vh, 220px); }
+  body.home .top h1 { max-width: 13.5em; text-align: center; font: 400 clamp(3rem, 7vw, 6.2rem)/1.02 var(--display); letter-spacing: -0.01em; text-shadow: 0 2px 22px rgba(0,0,0,.35); }
+  body.home .top h1 .mark { color: transparent; background-image: linear-gradient(105deg,#7fa224 0%,#7fa224 44%,#a8cf4c 48%,#d6ec9a 50%,#a8cf4c 52%,#7fa224 56%,#7fa224 100%);
+    background-size: 260% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; filter: drop-shadow(0 2px 14px rgba(0,0,0,.42)) drop-shadow(0 1px 1px rgba(0,0,0,.25)); }
+  body.home .top h1 .mark.shine { animation: shine var(--shine-dur, 2.2s) cubic-bezier(.45,.05,.35,1) 1; }
+  .top .top-lead { margin: 20px auto 0; text-align: center; font-family: var(--sans); }
+  body.home .top-ctas { justify-content: center; }
+  body.home .top .top-ctas .pill { background: rgba(244,241,235,.06); color: #F4F1EB; box-shadow: inset 0 0 0 1px rgba(244,241,235,.7); font-family: var(--sans); font-weight: 600; letter-spacing: .16em; padding: 17px 34px; }
+  body.home .top .top-ctas .pill:hover { background: rgba(244,241,235,.16); }
+  body.home .top-sub { display: flex; }
+  body.home .top { min-height: clamp(600px, 100svh, 980px); }
+  body.home .top .teaser { bottom: calc(92px + 13px); transform: translateY(50%); }
+  @media (max-width: 960px) {
+    body.home .top-copy { padding-bottom: 130px; }
+    body.home .top h1 { font-size: clamp(2.7rem, 12vw, 3.6rem); }
+  }
+
+  /* ===== v33: back to the light look, white instead of beige (photo hero stays dark) ===== */
+  :root { --cream: #ffffff; --paper: #ffffff; --sand: #f4f3ef; }
+  body { background: #ffffff; }
+
+  /* v31: her pick, font option 2 (Cormorant Garamond 500) for the big headline only */
+  body.home .top h1 { font-family: "Cormorant Garamond", "Times New Roman", serif; font-weight: 500; letter-spacing: -0.005em; line-height: 1; }
+  /* v32: headline block centred in the photo, a little above the middle (between the header and Meet Our Students) */
+  body.home .top { align-items: center; }
+  body.home .top-copy { padding: 96px var(--gutter) clamp(150px, 19vh, 200px); }
+  @media (max-width: 760px) { body.home .top-copy { padding: 84px var(--gutter) 150px; } }
+  /* v34: quicker, even slideshow: 4 s per photo, 1.1 s fade */
+  .top-bg .slide { transition: opacity 1.1s ease; }
+  /* v35: her pick, idea 14 "Elegant upright": small spaced caps on top, big Italiana below, all white */
+  body.home .top h1 { display: flex; flex-direction: column; align-items: center; gap: .14em; max-width: none; font: 400 clamp(3.4rem, 8.4vw, 7.4rem)/1 "Italiana", "Cormorant Garamond", serif; letter-spacing: .02em; color: #f6f2ea; }
+  body.home .top h1 .kick { font: 600 clamp(.78rem, 1.1vw, 1rem)/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; color: rgba(246,242,234,.88); text-shadow: 0 1px 12px rgba(0,0,0,.4); padding-left: .32em; }
+  body.home .top h1 .mark, body.home .top h1 .mark.shine { color: inherit; font-style: normal; background: none; -webkit-background-clip: border-box; background-clip: border-box; filter: none; animation: none; padding: 0; text-shadow: 0 2px 22px rgba(0,0,0,.35); }
+  @media (max-width: 760px) { body.home .top h1 { font-size: clamp(2.9rem, 13vw, 3.8rem); } }
+  /* v36: headline and line underneath swapped: the friendships line is the big headline, the slogan sits underneath */
+  body.home .top h1 { font-size: clamp(2.6rem, 5.4vw, 5rem); line-height: 1.08; max-width: 14em; }
+  body.home .top h1 .mark { white-space: normal; text-align: center; }
+  @media (max-width: 760px) { body.home .top h1 { font-size: clamp(2.3rem, 9.6vw, 3rem); } }
+  /* v37: their slogan as a big sign-off right before the footer */
+  .signoff { padding: clamp(64px, 9vw, 120px) var(--gutter) clamp(72px, 10vw, 130px); text-align: center; background: #ffffff; }
+  .signoff p { margin: 0; font: 400 clamp(3rem, 8.6vw, 7.6rem)/1 "Italiana", "Cormorant Garamond", serif; letter-spacing: .02em; color: var(--ink); }
+  body.home .top .top-lead { max-width: 34rem; }
+  .signoff p span { white-space: nowrap; }
+  /* v39: "Find your place" back to photo on top, text below, but the whole photo shows (not zoomed), centred, with a label, arrow link and hover */
+  #ways .paths { gap: clamp(18px, 2.4vw, 34px); align-items: start; }
+  #ways .path { display: block; text-decoration: none; color: var(--ink); }
+  #ways .path .ph { display: block; overflow: hidden; border-radius: 4px; margin-bottom: 20px; aspect-ratio: 3 / 2; background: #eef0ea; }
+  #ways .path img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: 50% 50%; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+  #ways .path:hover img { transform: scale(1.03); }
+  #ways .for { display: block; margin-bottom: 10px; font: 600 .66rem/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; color: #6f9020; }
+  #ways .path h3 { margin: 0 0 8px; font: 500 clamp(1.55rem, 2vw, 1.85rem)/1.1 var(--serif); color: var(--ink); }
+  #ways .path p { margin: 0 0 16px; font-size: .92rem; line-height: 1.6; color: var(--soft); }
+  #ways .go { display: inline-flex; align-items: center; gap: 10px; padding-bottom: 4px; border-bottom: 1px solid currentColor; font: 600 .7rem/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+  #ways .go svg { width: 16px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.4; transition: transform .35s ease; }
+  #ways .path:hover .go { color: #6f9020; }
+  #ways .path:hover .go svg { transform: translateX(5px); }
+  #ways .path:focus-visible { outline: 2px solid #7fa224; outline-offset: 6px; }
+  @media (min-width: 761px) {
+    #ways .paths { align-items: stretch; }
+    #ways .path { display: flex; flex-direction: column; }
+    #ways .pc { flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+    #ways .go { margin-top: auto; }
+  }
+  #ways > .wrap > .langs { margin: 22px 0 0; font-size: .82rem; color: var(--soft); text-align: center; }
+  #ways > .wrap > .langs a { color: var(--green-deep); }
+  @media (max-width: 760px) {
+    #ways .paths { gap: 16px; }
+    #ways .path { display: grid; grid-template-columns: 118px 1fr; column-gap: 16px; align-items: center; }
+    #ways .path .ph { grid-row: 1 / span 3; margin: 0; aspect-ratio: 1 / 1; width: 118px; }
+    #ways .for { margin-bottom: 6px; font-size: .58rem; }
+    #ways .path h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    #ways .path p { display: none; }
+    #ways .go { font-size: .62rem; justify-self: start; }
+  }
+</style>
+</head>
+<body class="home">
+
+<div class="announce"><span class="a1">High school exchange since 1987 · </span>Questions? Call us toll free at <a href="tel:+18778503312">(877) 850-3312</a></div>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top"><img class="lg-dark" src="img/logo.png" alt="NorthWest Student Exchange"><img class="lg-light" src="img/logo-light.png" alt="" aria-hidden="true"></a>
+    <nav class="nc"><a href="host.html">Host a Student</a><a href="student.html">Study Abroad</a><a href="coordinator.html">Local Coordinators</a><a href="#more">For Schools</a><a href="#why">About Us</a></nav>
+    <div class="nr"><div class="reg">
+      <button class="btn reg-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="reg-menu">Register Online<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 1.75 6 6.25l4.5-4.5"/></svg></button>
+      <div class="reg-menu" id="reg-menu" role="menu">
+        <a role="menuitem" href="host.html#register">Host Family Registration</a>
+        <a role="menuitem" href="student.html#register">Exchange Student Registration</a>
+        <a role="menuitem" href="coordinator.html#register">Area Coordinator Registration</a>
+      </div>
+    </div></div>
+  </div>
+  <div class="wrap subnav"><a href="host.html">Host a Student</a><a href="student.html">Study Abroad</a><a href="coordinator.html">Coordinators</a><a href="#more">For Schools</a><a href="#why">About Us</a></div>
+</header>
+
+<main id="top">
+  <section class="top">
+    <div class="top-bg" aria-hidden="true"><figure class="slide on" data-cap="Friends for life" data-student="lucas"><img src="img/stock/friends-mountain-sunset.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Game day" data-student="lena"><img src="img/nwse/2015_11_slider3.jpg" alt="" style="object-position:50% 35%"></figure><figure class="slide" data-cap="Weekends with your host family" data-student="ingrid"><img src="img/stock/camping-by-lake.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Sunsets together" data-student="matteo"><img src="img/stock/friends-watching-sunset.jpg" alt="" style="object-position:50% 45%"></figure><figure class="slide" data-cap="Adventures with friends" data-student="ingrid"><img src="img/stock/friends-mountain-trail.jpg" alt="" style="object-position:50% 45%"></figure><figure class="slide" data-cap="Beach bonfires with friends" data-student="lena"><img src="img/stock/beach-bonfire-guitar.jpg" alt="" style="object-position:50% 60%"></figure><figure class="slide" data-cap="Exploring the Pacific Northwest" data-student="haruto"><img src="img/nwse/2015_11_slider2b.jpg" alt="" style="object-position:50% 40%"></figure></div>
+    <div class="top-veil" aria-hidden="true"></div>
+    <div class="top-copy">
+      <h1><span class="mark">International Friendships That Last a Lifetime</span></h1>
+      <p class="top-lead">Host an exchange student, spend a school year abroad, or become a local coordinator and bring the world to your town.</p>
+      <div class="top-ctas">
+        <a class="pill" href="#ways">Learn More</a>
+      </div>
+    </div>
+    <p class="media-cap">01 · Game day</p>
+    <button class="teaser" data-open="lucas"><img src="img/hobby-volleyball.jpg?v=2" alt="" style="object-position:50% 30%"><span><small>Looking for a host family</small><b>Lucas, 16 · Brazil 🇧🇷</b><i>Meet Lucas</i></span></button>
+    <a class="top-sub" href="#students">Meet Our Students<span class="cue-line" aria-hidden="true"></span></a>
+  </section>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="chroma" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/><feOffset in="r" dx="-2.5" dy="0" result="r2"/>
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/><feOffset in="b" dx="2.5" dy="0" result="b2"/>
+    <feBlend mode="screen" in="r2" in2="g" result="rg"/><feBlend mode="screen" in="rg" in2="b2"/></filter></svg>
+
+  <ul class="values"><li>Since 1987</li><li>U.S. Dept. of State designated</li><li>CSIET listed</li><li>Local coordinators</li><li>Semester and school year</li></ul>
+
+  <div class="statement">
+    <div class="wrap two-col">
+      <h2>All you need:<em>an open home</em></h2>
+      <div class="txt">
+        <p>You don't have to have children. You don't have to travel. You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
+        <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="ways">
+    <div class="wrap">
+      <div class="head">
+        <h2>Find your place in an exchange</h2>
+      </div>
+      <div class="paths">
+        <a class="path" href="host.html">
+          <span class="ph"><img src="img/nwse/2024_12_spac.jpg" alt=""></span>
+          <div class="pc"><span class="for">For Families</span><h3>Host an Exchange Student</h3><p>Welcome a high school student into your family for a semester or a school year, and the world comes to you.</p><span class="go">Learn about hosting<svg viewBox="0 0 16 10" aria-hidden="true"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span></div>
+        </a>
+        <a class="path" href="student.html">
+          <span class="ph"><img src="img/nwse/2015_11_slider2b.jpg" alt=""></span>
+          <div class="pc"><span class="for">For Students</span><h3>Become an Exchange Student</h3><p>A student exchange changes your life. We organize affordable, meaningful exchanges in the USA, Germany, France, Spain, Japan, England and Scandinavia.</p><span class="go">Explore our programs<svg viewBox="0 0 16 10" aria-hidden="true"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span></div>
+        </a>
+        <a class="path" href="coordinator.html">
+          <span class="ph"><img src="img/nwse/2020_03_Celine-Engel-62nd-place.jpg" alt=""></span>
+          <div class="pc"><span class="for">For Your Community</span><h3>Become a Local Coordinator</h3><p>Make a real difference locally and abroad by finding host families and supporting exchange students in your community.</p><span class="go">About the role<svg viewBox="0 0 16 10" aria-hidden="true"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span></div>
+        </a>
+      </div>
+      <p class="langs">Student pages also in <a href="#">Deutsch</a>, <a href="#">日本語</a> and <a href="#">Hrvatski</a></p>
+    </div>
+  </section>
+
+  <section class="students" id="students">
+    <div class="wrap">
+      <div class="head">
+        <h2>Meet our exchange students</h2>
+        <p>Read about students who are hoping to join an American family, then talk with your local NWSE coordinator.</p>
+      </div>
+      <form class="filters" aria-label="Find a student"><label><span>Country</span><select name="country"><option value="">All countries</option><option>Brazil</option><option>Germany</option><option>Italy</option><option>Japan</option><option>Norway</option><option>Spain</option></select></label><label><span>Gender</span><select name="gender"><option value="">All</option><option>Female</option><option>Male</option></select></label><label><span>Hobbies/Activities</span><select name="hobby"><option value="">All hobbies</option><option>Baking</option><option>Basketball</option><option>Bicycling</option><option>Cooking</option><option>Drawing</option><option>Football</option><option>Golf</option><option>Hiking</option><option>Music</option><option>Photography</option><option>Skiing</option><option>Soccer</option><option>Surfing</option><option>Video games</option><option>Volleyball</option><option>Volunteering</option></select></label><span class="count" aria-live="polite">Showing 6 students</span></form>
+      <div class="cards">
+        <div class="card" data-country="Germany" data-gender="Female" data-hobbies="music|hiking|baking"><div class="pic"><img src="img/hobby-music.jpg" alt=""><span>Loves marching band</span></div><span class="where">from Germany 🇩🇪</span><h3>Lena</h3><span class="meta">Age 16 · Grade 11<br>Fall Semester 2027</span><p>Lena plays the trumpet in her school band and loves hiking with her family. She hopes to march with an American high school band during her exchange.</p><ul class="likes"><li>🎺 Trumpet</li><li>🥾 Hiking</li><li>🧁 Baking</li></ul><button class="link" data-open="lena">Read more</button></div>
+        <div class="card" data-country="Brazil" data-gender="Male" data-hobbies="volleyball|surfing|music"><div class="pic"><img src="img/hobby-volleyball.jpg?v=2" alt="" style="object-position: 50% 38%"><span>Loves volleyball</span></div><span class="where">from Brazil 🇧🇷</span><h3>Lucas</h3><span class="meta">Age 16 · Grade 11<br>Academic Year 2027</span><p>Lucas plays beach volleyball after school and loves surfing with his cousins. He hopes to join a high school volleyball team and see snow for the first time.</p><ul class="likes"><li>🏐 Volleyball</li><li>🏄 Surfing</li><li>🎸 Guitar</li></ul><button class="link" data-open="lucas">Read more</button></div>
+        <div class="card" data-country="Spain" data-gender="Female" data-hobbies="golf|volunteering|cooking"><div class="pic"><img src="img/hobby-golf.jpg" alt="" style="object-position: 30% 50%"><span>Loves golf</span></div><span class="where">from Spain 🇪🇸</span><h3>Lucía</h3><span class="meta">Age 15 · Grade 10<br>Academic Year 2027</span><p>Lucía plays golf with her father on weekends and enjoys cooking with her grandmother. She would love to join a high school golf team.</p><ul class="likes"><li>⛳ Golf</li><li>🤝 Volunteering</li><li>🥘 Cooking</li></ul><button class="link" data-open="lucia">Read more</button></div>
+        <div class="card" data-country="Japan" data-gender="Male" data-hobbies="basketball|drawing|video games"><div class="pic"><img src="img/hobby-basketball.jpg" alt=""><span>Loves basketball</span></div><span class="where">from Japan 🇯🇵</span><h3>Haruto</h3><span class="meta">Age 16 · Grade 11<br>Academic Year 2027</span><p>Haruto plays basketball for his school team and loves drawing. He hopes to join a high school team and visit a national park during his exchange.</p><ul class="likes"><li>🏀 Basketball</li><li>✏️ Drawing</li><li>🎮 Video games</li></ul><button class="link" data-open="haruto">Read more</button></div>
+        <div class="card" data-country="Norway" data-gender="Female" data-hobbies="soccer|skiing|photography"><div class="pic"><img src="img/hobby-soccer.jpg" alt=""><span>Loves soccer</span></div><span class="where">from Norway 🇳🇴</span><h3>Ingrid</h3><span class="meta">Age 15 · Grade 10<br>Fall Semester 2027</span><p>Ingrid plays soccer for her local club and loves skiing in the winter. She is excited to cheer at her first homecoming game.</p><ul class="likes"><li>⚽ Soccer</li><li>⛷️ Skiing</li><li>📷 Photography</li></ul><button class="link" data-open="ingrid">Read more</button></div>
+        <div class="card" data-country="Italy" data-gender="Male" data-hobbies="football|cooking|bicycling"><div class="pic"><img src="img/hobby-football.jpg" alt=""><span>Loves football</span></div><span class="where">from Italy 🇮🇹</span><h3>Matteo</h3><span class="meta">Age 17 · Grade 12<br>Academic Year 2027</span><p>Matteo plays American football with a club team at home and loves cooking for his friends. He dreams of a Friday night game under the lights.</p><ul class="likes"><li>🏈 Football</li><li>🍝 Cooking</li><li>🚴 Cycling</li></ul><button class="link" data-open="matteo">Read more</button></div>
+      </div>
+      <div class="foot-note"><span>Register to learn more about each student.</span><a class="link" href="#">See all students</a></div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap why">
+      <div>
+        <h2>Why host with <em>NWSE</em></h2>
+        <p class="intro">NorthWest Student Exchange has offered quality student exchange programs since 1987. We give every student and host family individual attention, so you always have someone to turn to.</p>
+        <a class="link" href="#">More about us</a>
+      </div>
+      <ul>
+        <li><b>A trusted non-profit</b><span>A U.S. Department of State designated exchange program since 1987, listed with the Council on Standards for International Educational Travel (CSIET).</span></li>
+        <li><b>Careful matching</b><span>We get to know every student through interviews, references, essays and hobbies, so your family and your student are a good fit.</span></li>
+        <li><b>Support close to home</b><span>Our local coordinators have lived or studied abroad, and many have hosted exchange students themselves.</span></li>
+        <li><b>Everything arranged</b><span>We provide orientations and coordinate insurance, travel and visas for every student.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="voices">
+    <div class="wrap voices-grid">
+      <div>
+        <a class="video" href="https://vimeo.com/145472056" data-vimeo="145472056"><img src="img/olivia-video.jpg" alt="Olivia from Denmark with her American host sisters"><span class="play"><span></span></span></a>
+        <p class="video-cap">Former NWSE student Olivia from Denmark made this video about her exchange year. <a href="#">More videos on our YouTube channel</a></p>
+      </div>
+      <div>
+        <blockquote>“Our biggest reward is that we built such an amazing friendship and feel like we gained another daughter.”</blockquote>
+        <cite>Julie and Kelly, host family in Utah</cite>
+        <a class="link" href="#">Read more testimonials</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" id="register">
+    <div class="wrap">
+      <h2>Interested in <em>hosting</em>?</h2>
+      <p class="sub">Register online for more information, with no obligation. An NWSE coordinator will contact you to answer your questions and talk about the next steps.</p>
+      <div class="ctas">
+        <a class="btn" href="host.html#register">Register Online</a>
+        <a class="btn line" href="tel:+18778503312">Call (877) 850-3312</a>
+      </div>
+      <div class="more-row" id="more">
+        <div><h3>For Schools</h3><p>How we work with high schools, from admission to shared goals and best practices.</p><a class="link" href="#">Information for schools</a></div>
+        <div><h3>Exchange Award to Germany</h3><p>Three awards for U.S. high school students of German to spend a semester or a year in Germany.</p><a class="link" href="#">About the award</a></div>
+        <div><h3>Nominate a Host Family</h3><p>Know a family who would make a wonderful host? Tell us, and we will reach out to them.</p><a class="link" href="#">Nominate a family</a></div>
+      </div>
+    </div>
+  </section>
+  <section class="signoff" aria-label="Our slogan"><p>(Ex)change <span>Your World</span></p></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <img src="img/logo.png" alt="NorthWest Student Exchange">
+        <p>3302 Fuhrman Ave E, Suite 201<br>Seattle, WA 98102</p>
+        <p><a href="tel:+18778503312">Toll free (877) 850-3312</a><a href="tel:+12065270917">+1 (206) 527 0917</a><a href="mailto:nwse@nwse.com">nwse@nwse.com</a></p>
+      </div>
+      <div><h4>Host Families</h4><a href="#">The Hosting Experience</a><a href="#">Why Host with NWSE</a><a href="#">Meet Our Students</a><a href="#">Frequently Asked Questions</a><a href="#">Testimonials</a></div>
+      <div><h4>Students</h4><a href="#">A Day in the Life</a><a href="#">Exchange Programs</a><a href="#">Exchange Countries</a><a href="#">Information for Parents</a><a href="#">Self-Placed Exchanges</a></div>
+      <div><h4>About Us</h4><a href="#">Partner with NWSE</a><a href="#">Scholarships and Grants</a><a href="#">Donate</a><a href="#">Jobs</a><a href="#">Blog</a></div>
+    </div>
+    <div class="foot-bottom"><span>© NorthWest Student Exchange</span><span>Homepage idea by Anja Gregoran Jenul · stand-in photos and example student profiles</span></div>
+  </div>
+</footer>
+<script>
+(function () {
+  var TEASE = { lucas: ['hobby-volleyball.jpg?v=2', 'Lucas, 16 · Brazil 🇧🇷', 'Lucas', '50% 30%'], lena: ['hobby-music.jpg', 'Lena, 16 · Germany 🇩🇪', 'Lena'],
+    matteo: ['hobby-football.jpg', 'Matteo, 17 · Italy 🇮🇹', 'Matteo'], ingrid: ['hobby-soccer.jpg', 'Ingrid, 15 · Norway 🇳🇴', 'Ingrid'], haruto: ['hobby-basketball.jpg', 'Haruto, 16 · Japan 🇯🇵', 'Haruto'] };
+  var HOLD = 4000;
+  var slides = [].slice.call(document.querySelectorAll('.slide')),
+      i = 0, t;
+  function show(n) {
+    var old = slides[i];
+    old.classList.remove('on'); old.classList.add('prev');
+    i = (n + slides.length) % slides.length;
+    var nw = slides[i];
+    nw.classList.add('on', 'blinding');
+    setTimeout(function () { nw.classList.remove('blinding'); old.classList.remove('prev'); }, 1500);
+    var cap = document.querySelector('.media-cap'), ts = document.querySelector('.teaser') || document.createElement('div'), f = slides[i];
+    cap.classList.add('fade'); ts.classList.add('fade');
+    setTimeout(function () {
+      cap.textContent = ('0' + (i + 1)).slice(-2) + ' · ' + f.dataset.cap;
+      var t = TEASE[f.dataset.student];
+      if (ts.isConnected) {
+      ts.dataset.open = f.dataset.student;
+      ts.querySelector('img').src = 'img/' + t[0]; ts.querySelector('img').style.objectPosition = t[3] || '50% 50%';
+      ts.querySelector('b').textContent = t[1]; ts.querySelector('i').textContent = 'Meet ' + t[2];
+      }
+      cap.classList.remove('fade'); ts.classList.remove('fade');
+    }, 400);
+    clearTimeout(t); t = setTimeout(function () { show(i + 1); }, HOLD);
+  }
+  // every photo stays the same time (4 s); the clock only starts once the page and all photos have loaded
+  function start() { t = setTimeout(function () { show(1); }, HOLD); }
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { if (document.readyState === 'complete') start(); else window.addEventListener('load', start); }
+})();
+</script>
+<dialog class="profile" id="profile" aria-label="Student profile"><button class="pf-close" aria-label="Close">×</button><div class="pf" id="pf"></div></dialog>
+<script>
+(function () {
+  var S = {"lena": {"name": "Lena", "country": "Germany", "flag": "🇩🇪", "sid": "27-1043", "age": 16, "grade": 11, "program": "Fall Semester 2027", "home": "near Freiburg", "loves": [["🎺", "Trumpet"], ["🥾", "Hiking"], ["🧁", "Baking"]], "hi": "Hallo, host family!", "letter": "I'm Lena and I live with my parents and my little brother Jonas in a small town near Freiburg, right by the Black Forest. I have played the trumpet for six years, and on weekends you will usually find me on a hiking trail or baking a cake for my family. I would love to be part of an American family's everyday life, from school mornings to movie nights.", "family": "Mom, dad and brother Jonas (12)", "pets": "Happy to live with cats and dogs", "subjects": "Music, English, Biology", "food": "Eats everything, loves trying new dishes", "dreams": ["March with a high school band", "Cheer at a Friday night football game", "Bake an apple pie for Thanksgiving"], "photos": ["hobby-music.jpg", "profile/lena-hiking.jpg", "profile/lena-band.jpg"], "allergies": "None", "hobbies": "Music, hiking, baking"}, "lucas": {"name": "Lucas", "country": "Brazil", "flag": "🇧🇷", "sid": "27-1187", "age": 16, "grade": 11, "program": "Academic Year 2027", "home": "Florianópolis", "loves": [["🏐", "Volleyball"], ["🏄", "Surfing"], ["🎸", "Guitar"]], "hi": "Oi, host family!", "letter": "I'm Lucas from Florianópolis, an island city in the south of Brazil. I play beach volleyball after school almost every day and go surfing with my cousins on weekends. I also play guitar and love music of all kinds. I am excited to learn how an American family lives, help around the house and maybe see snow for the very first time.", "family": "Mom, dad and sister Ana (19)", "pets": "Has a dog at home, loves animals", "subjects": "PE, Geography, English", "food": "Eats everything, big fan of barbecue", "dreams": ["Join a high school volleyball team", "See snow for the first time", "Celebrate a real Thanksgiving dinner"], "photos": ["hobby-volleyball.jpg?v=2", "profile/lucas-surf.jpg", "profile/lucas-beach.jpg"], "allergies": "None", "hobbies": "Volleyball, surfing, music"}, "lucia": {"name": "Lucía", "country": "Spain", "flag": "🇪🇸", "sid": "27-0968", "age": 15, "grade": 10, "program": "Academic Year 2027", "home": "Valencia", "loves": [["⛳", "Golf"], ["🤝", "Volunteering"], ["🥘", "Cooking"]], "hi": "¡Hola, host family!", "letter": "I'm Lucía from Valencia. I play golf with my father on weekends and volunteer at a summer camp for younger children. My grandmother taught me how to cook paella, and I would love to make it for my host family. I am calm and curious, and I am excited to join an American high school and make friends for life.", "family": "Mom, dad, grandmother and sister Carla (10)", "pets": "No pets yet, happy to live with them", "subjects": "Math, Biology, English", "food": "Eats everything", "dreams": ["Join a high school golf team", "Try softball for the first time", "Cook paella for my host family"], "photos": ["hobby-golf.jpg", "profile/lucia-paella.jpg", "profile/lucia-green.jpg"], "allergies": "None", "hobbies": "Golf, volunteering, cooking"}, "haruto": {"name": "Haruto", "country": "Japan", "flag": "🇯🇵", "sid": "27-1122", "age": 16, "grade": 11, "program": "Academic Year 2027", "home": "Osaka", "loves": [["🏀", "Basketball"], ["✏️", "Drawing"], ["🎮", "Video games"]], "hi": "Hello, host family!", "letter": "I'm Haruto from Osaka. I play basketball for my school team and I love drawing, especially comics and buildings. I am a little shy at first, but I love to laugh and I always help in the kitchen. I hope to join a high school basketball team and visit a national park with my host family.", "family": "Mom, dad and brother Ren (18)", "pets": "Happy to live with cats and dogs", "subjects": "Art, Math, English", "food": "Eats everything, wants to try a real American burger", "dreams": ["Play on a high school basketball team", "Visit a national park", "Fill a sketchbook with American places"], "photos": ["hobby-basketball.jpg", "profile/haruto-draw.jpg", "profile/haruto-court.jpg"], "allergies": "None", "hobbies": "Basketball, drawing, video games"}, "ingrid": {"name": "Ingrid", "country": "Norway", "flag": "🇳🇴", "sid": "27-1205", "age": 15, "grade": 10, "program": "Fall Semester 2027", "home": "Lillehammer", "loves": [["⚽", "Soccer"], ["⛷️", "Skiing"], ["📷", "Photography"]], "hi": "Hei, host family!", "letter": "I'm Ingrid from Lillehammer, a ski town in Norway. I play soccer for my local club in summer and ski all winter long. I love taking photos of nature and my friends. I am outgoing and love being part of a team, and I can't wait to cheer at my first homecoming game.", "family": "Mom, dad and twin brother Erik", "pets": "Has a cat at home", "subjects": "PE, Art, English", "food": "Eats everything, loves pancakes", "dreams": ["Play high school soccer", "Go to homecoming", "Take photos in every season"], "photos": ["hobby-soccer.jpg", "profile/ingrid-ski.jpg", "profile/ingrid-ball.jpg"], "allergies": "Pollen (mild)", "hobbies": "Soccer, skiing, photography"}, "matteo": {"name": "Matteo", "country": "Italy", "flag": "🇮🇹", "sid": "27-1011", "age": 17, "grade": 12, "program": "Academic Year 2027", "home": "Bologna", "loves": [["🏈", "Football"], ["🍝", "Cooking"], ["🚴", "Cycling"]], "hi": "Ciao, host family!", "letter": "I'm Matteo from Bologna. I play American football with a club team, which is not very common in Italy, so I dream of playing under the Friday night lights. I love making fresh pasta with my mom and cycling in the hills on weekends. I am friendly, easygoing and always ready to try something new.", "family": "Mom, dad and brother Luca (14)", "pets": "Happy to live with cats and dogs", "subjects": "History, PE, English", "food": "Eats everything, will happily cook pasta for you", "dreams": ["Play on a high school football team", "Feel a Friday night game under the lights", "Cook an Italian dinner for my host family"], "photos": ["hobby-football.jpg", "profile/matteo-pasta.jpg", "profile/matteo-lights.jpg"], "allergies": "None", "hobbies": "Football, cooking, bicycling"}}, ORDER = ["lena", "lucas", "lucia", "haruto", "ingrid", "matteo"], cur = 0;
+  var dlg = document.getElementById('profile'), box = document.getElementById('pf');
+  function esc(t) { return String(t).replace(/[&<>]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  function render(id) {
+    var s = S[id]; cur = ORDER.indexOf(id);
+    var prev = S[ORDER[(cur + ORDER.length - 1) % ORDER.length]], next = S[ORDER[(cur + 1) % ORDER.length]];
+    box.innerHTML =
+      '<div class="pf-media">' + s.photos.map(function (p) { return '<img src="img/' + p + '" alt="">'; }).join('') + '</div>' +
+      '<div class="pf-body">' +
+        '<span class="where">from ' + esc(s.country) + ' ' + s.flag + '</span><h2>' + esc(s.name) + '</h2><span class="sid">Student ID ' + s.sid + '</span>' +
+        '<ul class="pf-quick"><li><b>Age</b>🎂 ' + s.age + '</li><li><b>Grade</b>🏫 ' + s.grade + '</li><li><b>Program</b>📅 ' + esc(s.program) + '</li><li><b>Hometown</b>📍 ' + esc(s.home) + '</li></ul>' +
+        '<h4>Loves</h4><ul class="pf-loves">' + s.loves.map(function (l) { return '<li>' + l[0] + ' ' + esc(l[1]) + '</li>'; }).join('') + '</ul>' +
+        '<div class="pf-letter"><p class="hi">' + esc(s.hi) + '</p><p>' + esc(s.letter) + '</p></div>' +
+        '<h4>Good to know</h4><div class="pf-facts">' +
+          '<div><span class="ic">👨‍👩‍👧</span><b>Family</b><span>' + esc(s.family) + '</span></div>' +
+          '<div><span class="ic">🐾</span><b>Pets</b><span>' + esc(s.pets) + '</span></div>' +
+          '<div><span class="ic">📚</span><b>Favorite subjects</b><span>' + esc(s.subjects) + '</span></div>' +
+          '<div><span class="ic">🍽️</span><b>Food</b><span>' + esc(s.food) + '</span></div>' +
+          '<div><span class="ic">🌿</span><b>Allergies</b><span>' + esc(s.allergies) + '</span></div>' +
+          '<div><span class="ic">🎯</span><b>Hobbies/Activities</b><span>' + esc(s.hobbies) + '</span></div>' +
+        '</div>' +
+        '<h4>In the USA I would love to</h4><ul class="pf-dreams">' + s.dreams.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul>' +
+        '<div class="pf-cta"><a class="btn" href="#register">Register to Learn More</a><span>or call <a class="tel" href="tel:+18778503312">(877) 850-3312</a></span></div>' +
+        '<div class="pf-nav"><button data-go="-1">← ' + esc(prev.name) + '</button><button data-go="1">' + esc(next.name) + ' →</button></div>' +
+      '</div>';
+    dlg.scrollTop = 0;
+  }
+  document.querySelectorAll('[data-open]').forEach(function (b) {
+    b.addEventListener('click', function () { render(b.dataset.open); dlg.showModal(); });
+  });
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg || e.target.closest('.pf-close')) dlg.close();
+    var go = e.target.closest('[data-go]');
+    if (go) render(ORDER[(cur + +go.dataset.go + ORDER.length) % ORDER.length]);
+    if (e.target.closest('.pf-cta .btn')) dlg.close();
+  });
+  var form = document.querySelector('.filters'), count = form.querySelector('.count');
+  form.addEventListener('change', function () {
+    var c = form.country.value, g = form.gender.value, h = form.hobby.value.toLowerCase(), n = 0;
+    document.querySelectorAll('.cards .card').forEach(function (card) {
+      var ok = (!c || card.dataset.country === c) && (!g || card.dataset.gender === g) && (!h || card.dataset.hobbies.split('|').indexOf(h) > -1);
+      card.classList.toggle('hide', !ok); if (ok) n++;
+    });
+    count.textContent = n ? 'Showing ' + n + (n === 1 ? ' student' : ' students') : 'No students match yet, try another filter';
+  });
+})();
+</script>
+<script>
+document.querySelectorAll('.video[data-vimeo]').forEach(function (v) {
+  v.addEventListener('click', function (e) {
+    if (v.classList.contains('playing')) return;
+    e.preventDefault();
+    v.classList.add('playing');
+    v.innerHTML = '<iframe src="https://player.vimeo.com/video/' + v.dataset.vimeo + '?autoplay=1&dnt=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Olivia\'s exchange year video"></iframe>';
+  });
+});
+</script>
+<script>
+// Mockup only: footer and closing buttons are for show and do not go anywhere
+document.querySelectorAll('footer a, .closing a:not([href^="host.html"])').forEach(function (a) {
+  a.addEventListener('click', function (e) { e.preventDefault(); });
+});
+</script>
+<script>
+// Subtle shine on "the world comes to you" at random moments
+(function () {
+  var m = document.querySelector('.top h1 .mark');
+  if (!m || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function next() { setTimeout(run, 4500 + Math.random() * 9500); }
+  function run() {
+    if (document.hidden) return next();
+    m.style.setProperty('--shine-dur', (1.8 + Math.random() * 1.2).toFixed(2) + 's');
+    m.classList.add('shine');
+  }
+  m.addEventListener('animationend', function () { m.classList.remove('shine'); next(); });
+  setTimeout(run, 2200 + Math.random() * 2500);
+})();
+</script>
+<script>
+// Register Online dropdown
+(function () {
+  var reg = document.querySelector('.reg'); if (!reg) return;
+  var btn = reg.querySelector('.reg-btn'), menu = reg.querySelector('.reg-menu');
+  function set(open) { reg.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); set(!reg.classList.contains('open')); if (reg.classList.contains('open')) menu.querySelector('a').focus({ preventScroll: true }); });
+  menu.addEventListener('click', function () { set(false); });
+  document.addEventListener('click', function (e) { if (!reg.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && reg.classList.contains('open')) { set(false); btn.focus(); } });
+})();
+</script>
+<script>
+(function () {
+  var h = document.querySelector('header'), top = document.querySelector('.top');
+  function u() { h.classList.toggle('solid', window.scrollY > top.offsetHeight - h.offsetHeight - 10); }
+  window.addEventListener('scroll', u, { passive: true }); window.addEventListener('resize', u); u();
+})();
+</script>
+<script>
+// Mockup: buttons for things that are not built yet stay clickable but go nowhere
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('a');
+  if (!a) return;
+  var h = a.getAttribute('href');
+  if (h === '#' || h === '#more' || h === '#why') e.preventDefault();
+}, true);
+</script>
+<a class="concept-tag" href="#" onclick="return false" style="position:fixed;left:14px;bottom:14px;z-index:9999;padding:7px 12px;border-radius:999px;background:rgba(20,26,18,.78);color:#f6f2ea;font:500 11px/1.2 'Instrument Sans',Arial,sans-serif;letter-spacing:.04em;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">Design concept by Anja for NorthWest Student Exchange</a>
+</body>
+</html>
