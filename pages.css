@@ -241,3 +241,27 @@ form.mini select { -webkit-appearance: none; appearance: none; padding-right: 40
   .register > img { grid-column: 1; min-height: 0; height: auto; aspect-ratio: 4 / 3; }
   .register .wrap { grid-column: 1; max-width: none; padding: 48px var(--gutter) 64px; }
 }
+
+/* v10: logo a little bigger, top links and button a little bigger, their slogan "(Ex)change Your World" under the logo.
+   Before: backups-pages/pages-v9-before-bigger-logo.css */
+.logo { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-decoration: none; }
+.logo img { height: 42px; }
+.logo .tagline { margin-left: 47px; font: 400 15px/1 "Italiana", serif; letter-spacing: .03em; color: rgba(244,241,235,.92); white-space: nowrap; }
+header.solid .logo .tagline { color: #6f9020; }
+.bar { height: 86px; }
+nav.nc { font-size: 0.8rem; }
+.reg-btn { font-size: 0.8rem; padding: 14px 26px; }
+@media (max-width: 1180px) { nav.nc { gap: 20px; font-size: 0.7rem; } }
+@media (max-width: 860px) {
+  .bar { height: 66px; }
+  .logo img { height: 34px; }
+  .logo .tagline { margin-left: 38px; font-size: 12.5px; }
+  .reg-btn { font-size: 0.68rem; padding: 11px 16px; }
+}
+.reg-btn { white-space: nowrap; }
+@media (min-width: 861px) and (max-width: 1240px) { nav.nc { gap: 18px; font-size: 0.68rem; letter-spacing: .12em; } .reg-btn { font-size: 0.7rem; padding: 12px 18px; } }
+@media (min-width: 861px) and (max-width: 1120px) { .logo img { height: 36px; } .logo .tagline { margin-left: 41px; font-size: 13px; } nav.nc { gap: 14px; font-size: 0.6rem; letter-spacing: .1em; } .reg-btn { padding: 11px 14px; font-size: 0.64rem; } }
+@media (min-width: 861px) and (max-width: 960px) {
+  .bar { grid-template-columns: auto 1fr; } nav.nc { display: none; }
+  .subnav { display: flex; gap: 22px; white-space: nowrap; padding: 0 var(--gutter) 12px; font-size: 0.86rem; font-weight: 500; }
+}

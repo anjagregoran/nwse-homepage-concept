@@ -604,6 +604,21 @@
     #ways .path p { display: none; }
     #ways .go { font-size: .62rem; justify-self: start; }
   }
+
+  /* v40: logo a little bigger, top links and button a little bigger, their slogan under the logo. Before: version-39-before-bigger-logo.html */
+  header .logo { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-decoration: none; }
+  header .logo img { height: 42px; }
+  header .logo .tagline { margin-left: 47px; font: 400 15px/1 "Italiana", serif; letter-spacing: .03em; color: #6f9020; white-space: nowrap; }
+  body.home header:not(.solid) .logo .tagline { color: rgba(244,241,235,.92); }
+  header nav.nc { font-size: 0.8rem; }
+  header .nr .btn.reg-btn { font-size: 0.8rem; padding: 14px 26px; }
+  @media (max-width: 1180px) { header nav.nc { gap: 20px; font-size: 0.7rem; } }
+  @media (min-width: 861px) and (max-width: 1100px) { header nav.nc { gap: 16px; font-size: 0.66rem; } header .nr .btn.reg-btn { font-size: 0.7rem; padding: 12px 18px; } }
+  @media (max-width: 860px) {
+    header .logo img { height: 34px; }
+    header .logo .tagline { margin-left: 38px; font-size: 12.5px; }
+    header .nr .btn.reg-btn { padding: 9px 15px; font-size: 0.72rem; }
+  }
 </style>
 </head>
 <body class="home">
@@ -611,7 +626,7 @@
 <div class="announce"><span class="a1">High school exchange since 1987 · </span>Questions? Call us toll free at <a href="tel:+18778503312">(877) 850-3312</a></div>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#top"><img class="lg-dark" src="img/logo.png" alt="NorthWest Student Exchange"><img class="lg-light" src="img/logo-light.png" alt="" aria-hidden="true"></a>
+    <a class="logo" href="#top"><img class="lg-dark" src="img/logo.png" alt="NorthWest Student Exchange"><img class="lg-light" src="img/logo-light.png" alt="" aria-hidden="true"><span class="tagline">(Ex)change Your World</span></a>
     <nav class="nc"><a href="host.html">Host a Student</a><a href="student.html">Study Abroad</a><a href="coordinator.html">Local Coordinators</a><a href="#more">For Schools</a><a href="#why">About Us</a></nav>
     <div class="nr"><div class="reg">
       <button class="btn reg-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="reg-menu">Register Online<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 1.75 6 6.25l4.5-4.5"/></svg></button>
