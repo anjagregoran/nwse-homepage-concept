@@ -276,3 +276,33 @@ nav.nc { font-size: 0.8rem; }
 footer .f-end { display: grid; gap: 14px; justify-items: end; }
 footer .f-slogan { margin: 0; font: 400 clamp(1.7rem, 2.6vw, 2.3rem)/1 "Italiana", serif; color: #f6f2ea; letter-spacing: .01em; }
 @media (max-width: 860px) { footer .f-end { justify-items: start; } }
+
+/* v12: slogan above the menu instead of under the logo; host italic line on one row and clearly bigger than the plain line under it */
+.logo .tagline { display: none; }
+nav.nc { position: relative; padding-top: 26px; }
+nav.nc::before { content: "(Ex)change Your World"; position: absolute; top: 0; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font: 400 17px/1 "Italiana", serif; letter-spacing: .04em; text-transform: none; color: rgba(244,241,235,.95); }
+header.solid nav.nc::before { color: #6f9020; }
+.top-benefits .note { max-width: none; font-size: clamp(1.6rem, 2.6vw, 2.35rem); line-height: 1.2; margin-top: 30px; }
+.top-benefits .note + .lead { margin-top: 16px; font-size: 1.02rem; color: rgba(244,241,235,.78); }
+@media (max-width: 860px) { .top-benefits .note { font-size: 1.4rem; } }
+.top-benefits .note + .lead { max-width: 48rem; }
+
+/* v13: simple, clean, premium. White headline only (no green), one line under it, one button, and the benefits as one quiet row
+   of short words. No green text anywhere except NWSE's buttons. Before: backups-pages/pages-v13-before-simple.css */
+.phero h1 em { color: inherit; font-style: normal; display: inline; }
+.top-benefits h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 1.02; }
+.top-benefits .note { margin-top: 22px; font-size: clamp(1.35rem, 2vw, 1.75rem); color: rgba(255,255,255,.9); }
+.top-benefits .lead { margin-top: 20px; max-width: 36rem; font-size: 1.05rem; color: rgba(255,255,255,.8); }
+.top-benefits .ctas { margin-top: 36px; }
+.perks { list-style: none; margin: clamp(48px, 7vh, 80px) 0 0; padding: 22px 0 0; width: 100%; border-top: 1px solid rgba(255,255,255,.18);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 0; }
+.perks li { font: 500 0.72rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.8); padding: 0 clamp(16px, 2.4vw, 34px); }
+.perks li + li { border-left: 1px solid rgba(255,255,255,.25); }
+.register .eyebrow, .next .eyebrow, .eyebrow { color: #7d8577; }
+.phero .eyebrow { color: rgba(255,255,255,.72); }
+.register .wrap { gap: 26px; }
+@media (max-width: 860px) {
+  .perks { flex-direction: column; align-items: center; gap: 14px; }
+  .perks li + li { border-left: 0; }
+}
