@@ -619,6 +619,18 @@
     header .logo .tagline { margin-left: 38px; font-size: 12.5px; }
     header .nr .btn.reg-btn { padding: 9px 15px; font-size: 0.72rem; }
   }
+
+  /* v41: "more flowy, like a little movie". Every photo slowly glides and zooms like a camera move, the next one
+     melts in over the moving one, and the moves change direction from photo to photo. Before: version-40-before-flowy-slides.html */
+  .top-bg .slide { transition: opacity 2s cubic-bezier(.4,0,.2,1); }
+  .top-bg .slide img { will-change: transform; transform: scale(1.12); }
+  .top-bg .slide.on img, .top-bg .slide.prev img { animation: glide-a 8s linear forwards; }
+  .top-bg .slide:nth-child(2n).on img, .top-bg .slide:nth-child(2n).prev img { animation-name: glide-b; }
+  .top-bg .slide:nth-child(3n).on img, .top-bg .slide:nth-child(3n).prev img { animation-name: glide-c; }
+  @keyframes glide-a { from { transform: scale(1.03) translate3d(-1.2%, 0, 0); } to { transform: scale(1.13) translate3d(1.2%, -0.6%, 0); } }
+  @keyframes glide-b { from { transform: scale(1.13) translate3d(1.2%, 0.6%, 0); } to { transform: scale(1.03) translate3d(-1%, 0, 0); } }
+  @keyframes glide-c { from { transform: scale(1.04) translate3d(0, 1%, 0); } to { transform: scale(1.14) translate3d(0, -1%, 0); } }
+  @media (prefers-reduced-motion: reduce) { .top-bg .slide img, .top-bg .slide.on img, .top-bg .slide.prev img { animation: none; transform: none; } }
 </style>
 </head>
 <body class="home">
@@ -791,7 +803,7 @@
     i = (n + slides.length) % slides.length;
     var nw = slides[i];
     nw.classList.add('on', 'blinding');
-    setTimeout(function () { nw.classList.remove('blinding'); old.classList.remove('prev'); }, 1500);
+    setTimeout(function () { nw.classList.remove('blinding'); old.classList.remove('prev'); }, 2300);
     var cap = document.querySelector('.media-cap'), ts = document.querySelector('.teaser') || document.createElement('div'), f = slides[i];
     cap.classList.add('fade'); ts.classList.add('fade');
     setTimeout(function () {
