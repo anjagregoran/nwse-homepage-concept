@@ -265,3 +265,14 @@ nav.nc { font-size: 0.8rem; }
   .bar { grid-template-columns: auto 1fr; } nav.nc { display: none; }
   .subnav { display: flex; gap: 22px; white-space: nowrap; padding: 0 var(--gutter) 12px; font-size: 0.86rem; font-weight: 500; }
 }
+
+/* v11: her reference mixed upright and italic type. Each headline ends in green italic, and the host page gets
+   NWSE's own "You don't need to..." line in italic serif above the plain lead. Before: backups-pages/pages-v10-before-italic.css */
+.phero h1 em { display: block; }
+.top-benefits .note { margin: 26px auto 0; max-width: 34rem; font: italic 400 clamp(1.45rem, 2.2vw, 1.9rem)/1.25 var(--serif); color: #f6f2ea; text-shadow: 0 2px 18px rgba(0,0,0,.3); }
+.top-benefits .note + .lead { margin-top: 12px; }
+@media (max-width: 860px) { .top-benefits .note { font-size: 1.3rem; margin-top: 18px; } }
+/* slogan above the footer links (registration pages have no big sign-off like the homepage) */
+footer .f-end { display: grid; gap: 14px; justify-items: end; }
+footer .f-slogan { margin: 0; font: 400 clamp(1.7rem, 2.6vw, 2.3rem)/1 "Italiana", serif; color: #f6f2ea; letter-spacing: .01em; }
+@media (max-width: 860px) { footer .f-end { justify-items: start; } }
