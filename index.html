@@ -793,7 +793,7 @@
   .closing .cta-side .tel:hover { color: var(--green-deep); border-color: var(--green-deep); }
   .closing .badge { position: relative; width: 168px; height: 168px; display: block; color: var(--ink); text-decoration: none; }
   .closing .badge svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: badge-spin 22s linear infinite; }
-  .closing .badge svg.ring text { font: 500 10.5px var(--sans); letter-spacing: .3em; text-transform: uppercase; fill: var(--ink); }
+  .closing .badge svg.ring text { font: 500 10.5px var(--sans); letter-spacing: 0; text-transform: uppercase; fill: var(--ink); } /* v74: the words are spaced to fit the circle exactly (textLength), so they never run over each other in Safari */
   .closing .badge .mid { position: absolute; inset: 30px; border-radius: 50%; background: var(--ink); color: #f4f1eb; display: grid; place-items: center; text-align: center; font: italic 400 1.35rem/1.05 var(--serif); transition: background .3s, transform .4s; }
   .closing .badge:hover .mid { background: var(--green-deep); transform: scale(1.05); }
   @keyframes badge-spin { to { transform: rotate(360deg); } }
@@ -929,7 +929,7 @@
       <p class="sub">Register online for more information, with no obligation. An NWSE coordinator will contact you to answer your questions and talk about the next steps.</p>
       <a class="tel" href="tel:+18778503312">Call (877) 850-3312</a>
     </div>
-    <a class="badge" href="#" data-href="host.html#register" aria-label="Register Online"><svg class="ring" viewBox="0 0 168 168" aria-hidden="true"><defs><path id="badge-ring" d="M84,84 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#badge-ring">Register online · no obligation · Register online · no obligation ·</textPath></text></svg><span class="mid">Register<br>Online</span></a>
+    <a class="badge" href="#" data-href="host.html#register" aria-label="Register Online"><svg class="ring" viewBox="0 0 168 168" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="badge-ring" d="M84,84 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#badge-ring" xlink:href="#badge-ring" textLength="452" lengthAdjust="spacing">Register online · no obligation · Register online · no obligation ·</textPath></text></svg><span class="mid">Register<br>Online</span></a>
     </div>
     </div>
   </section>
