@@ -956,7 +956,9 @@
       if (ts.isConnected) {
       ts.dataset.open = f.dataset.student;
       ts.querySelector('img').src = 'img/' + t[0]; ts.querySelector('img').style.objectPosition = t[3] || '50% 50%';
-      ts.querySelector('b').textContent = t[1]; ts.querySelector('i').textContent = 'Meet ' + t[2];
+      // v68: name and age on top, country underneath (no flag), so the card never shows Germany with Brazil under it
+      var nm = t[1].split(' · '); ts.querySelector('b').textContent = nm[0]; var em = ts.querySelector('em'); if (em) em.textContent = (nm[1] || '').replace(/[^A-Za-z ]/g, '').trim();
+      var ii = ts.querySelector('i'); ii.firstChild.nodeValue = 'Meet ' + t[2];
       }
       cap.classList.remove('fade'); ts.classList.remove('fade');
     }, 400);
