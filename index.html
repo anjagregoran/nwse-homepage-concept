@@ -765,6 +765,22 @@
   .closing .open-row p + p { margin-top: 10px; }
   .closing .open-row p.dont { font: italic 400 clamp(1.15rem, 1.5vw, 1.35rem)/1.4 var(--serif); color: var(--ink); margin-bottom: 14px; }
   @media (max-width: 900px) { .closing .open-row { grid-template-columns: 1fr; gap: 26px; } .closing .open-row h2 { white-space: normal; } }
+  /* v67: bottom in one calm row: "All you need" on the left, "Interested in hosting?" with the buttons on the right, a thin line between, on cream */
+  .closing { background: #f6f2ea; padding: clamp(72px, 8vw, 112px) var(--gutter); text-align: left; }
+  .closing .split { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); align-items: center; }
+  .closing .open-row { display: block; max-width: none; margin: 0; padding: 0 clamp(40px, 5vw, 84px) 0 0; border: 0; }
+  .closing .open-row h2 { white-space: normal; font-size: clamp(1.35rem, 2vw, 1.85rem); margin: 0 0 24px; }
+  .closing .open-row .txt { border: 0; padding: 0; }
+  .closing .open-row p { max-width: 31rem; }
+  .closing .cta-side { border-left: 1px solid rgba(30,43,27,.2); padding: 8px 0 8px clamp(40px, 5vw, 84px); }
+  .closing .cta-side h2 { font-size: clamp(2.1rem, 3.2vw, 3rem); max-width: none; margin: 0; text-align: left; }
+  .closing .cta-side p.sub { max-width: 27em; margin: 16px 0 28px; text-align: left; }
+  .closing .cta-side .ctas { justify-content: flex-start; }
+  @media (max-width: 900px) {
+    .closing .split { grid-template-columns: 1fr; }
+    .closing .open-row { padding: 0 0 40px; }
+    .closing .cta-side { border-left: 0; border-top: 1px solid rgba(30,43,27,.2); padding: 40px 0 0; }
+  }
 </style>
 </head>
 <body class="home">
@@ -881,6 +897,7 @@
   </section>
 
   <section class="closing" id="register">
+    <div class="split">
     <div class="open-row">
       <h2>All you need: <em>an open home</em></h2>
       <div class="txt">
@@ -889,13 +906,14 @@
         <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
       </div>
     </div>
-    <div class="wrap">
+    <div class="cta-side">
       <h2>Interested in <em>hosting</em>?</h2>
       <p class="sub">Register online for more information, with no obligation. An NWSE coordinator will contact you to answer your questions and talk about the next steps.</p>
       <div class="ctas">
         <a class="btn" href="#" data-href="host.html#register">Register Online</a>
         <a class="btn line" href="tel:+18778503312">Call (877) 850-3312</a>
       </div>
+    </div>
     </div>
   </section>
   <section class="signoff" aria-label="Our slogan"><p>(Ex)change <span>Your World</span></p></section>
