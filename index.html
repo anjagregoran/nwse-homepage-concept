@@ -799,6 +799,11 @@
   @keyframes badge-spin { to { transform: rotate(360deg); } }
   @media (prefers-reduced-motion: reduce) { .closing .badge svg.ring { animation: none; } }
   @media (max-width: 560px) { .closing .cta-side { grid-template-columns: 1fr; } }
+  /* v75: Anja picked design 2: a small "All you need" label, then "an open home" very large in a light italic, in the same dark green as the Register circle. Before: version-75-before-big-open-home.html */
+  .closing .open-row .kick { font: 500 11px/1 var(--sans); letter-spacing: .32em; text-transform: uppercase; color: var(--soft); }
+  .closing .open-row h2 { font: italic 300 clamp(3.4rem, 6vw, 5.6rem)/.95 var(--serif); letter-spacing: -.01em; text-transform: none; color: var(--ink); margin: 14px 0 28px; white-space: normal; }
+  .closing .open-row p.dont { font: 400 clamp(1.2rem, 1.6vw, 1.45rem)/1.4 var(--serif); margin-bottom: 16px; }
+  .closing .open-row p { font-size: .96rem; max-width: 30rem; }
 </style>
 </head>
 <body class="home">
@@ -917,7 +922,8 @@
   <section class="closing" id="register">
     <div class="split">
     <div class="open-row">
-      <h2>All you need: <em>an open home</em></h2>
+      <div class="kick">All you need</div>
+      <h2>an open home</h2>
       <div class="txt">
         <p class="dont">You don’t have to have children. You don’t have to travel.</p>
         <p>You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
