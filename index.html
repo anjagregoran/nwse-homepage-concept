@@ -770,6 +770,9 @@
   .top-bg .slide.on { z-index: 2; }
   .top-bg .slide.prev { opacity: 1; z-index: 1; }
   .top-video, .top-video .vl { transition: opacity .4s ease; }
+  /* v61: YouTube shows a pause sign in the middle of a video for ~4 s after it starts. While that can happen, a soft blur sits exactly there, so the sign never shows */
+  .top-video .yt-veil { position: absolute; left: 50%; top: 50%; width: 320px; height: 240px; transform: translate(-50%, -50%); -webkit-backdrop-filter: blur(28px); backdrop-filter: blur(28px); -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent); mask-image: radial-gradient(closest-side, #000 55%, transparent); opacity: 0; transition: opacity .25s ease; pointer-events: none; z-index: 3; }
+  .top-video .yt-veil.on { opacity: 1; transition: none; }
 </style>
 </head>
 <body class="home">
@@ -794,7 +797,7 @@
 <main id="top">
   <section class="top">
     <div class="top-bg" aria-hidden="true"><figure class="slide on" data-cap="Friends for life" data-student="lucas"><img src="img/stock/friends-mountain-sunset.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Game day" data-student="lena"><img src="img/nwse/2015_11_slider3.jpg" alt="" style="object-position:50% 35%"></figure><figure class="slide" data-cap="Exploring the Pacific Northwest" data-student="haruto"><img src="img/nwse/2015_11_slider2b.jpg" alt="" style="object-position:50% 40%"></figure><figure class="slide" data-cap="Welcome home" data-student="ingrid"><img src="img/nwse/2015_11_slider1b.jpg" alt="" style="object-position:50% 30%"></figure></div>
-    <div class="top-video" aria-hidden="true"><div class="vl"><div id="hero-yt-0"></div></div><div class="vl"><div id="hero-yt-1"></div></div><div class="vl"><div id="hero-yt-2"></div></div></div>
+    <div class="top-video" aria-hidden="true"><div class="vl"><div id="hero-yt-0"></div></div><div class="vl"><div id="hero-yt-1"></div></div><div class="vl"><div id="hero-yt-2"></div></div><div class="yt-veil"></div></div>
     <div class="top-veil" aria-hidden="true"></div>
     <div class="top-copy">
       <h1><span class="mark">International Friendships That Last a Lifetime</span></h1>
@@ -1072,20 +1075,29 @@ document.addEventListener('click', function (e) {
    so while the next shot gets ready, photos keep coming in the same rhythm. Before: version-58-before-same-rhythm.html */
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var V6 = '1DHX-Fgk8RE', V3 = '3yiepRetCw4';
+  var V6 = '1DHX-Fgk8RE', V3 = '3yiepRetCw4', V1 = 'BtidBqNhTBM', V4 = 'bWa517HnLS4';
   // [video, start s, end s]. Times measured on the real player, each one a single scene. The three car parts are kept apart.
+  // v62: every clip Anja picked in the clip picker, in her words. Times checked frame by frame. The two car parts are kept apart.
+  // 'cue' = starts at the very first frame of its video, so it cannot get ready hidden; the soft blur covers YouTube's sign on it.
   var SHOTS = [
-    [V6, 78.5, 81.6],     // car, first half: laughing in front of the camera with sunglasses (3.1 s)
-    [V3, 97.8, 99.6],     // hiker above the canyon, arms up
-    [V6, 73.5, 75.5],     // hot air balloon, everyone in the basket
-    [V6, 82.0, 86.0],     // car, second half: dancing, then laughing and leaning back in the chair (4 s, kept apart from the first half)
-    [V6, 142.2, 144.2]    // school stage show, the dancing
+    [V6, 78.5, 81.6],          // car, first half: laughing in front of the camera with sunglasses
+    [V1, 0, 3.0, 'cue'],       // desert with cactus, the whole clip
+    [V4, 152.15, 154.2],       // walk in the snow: the moment she blows the snow
+    [V6, 142.2, 144.6],        // school stage show (without the living room and TV), then the Petrified Forest picture
+    [V1, 5.3, 7.3],            // red rock canyon
+    [V6, 82.0, 86.0],          // car, second half: dancing, then laughing and leaning back in the chair
+    [V4, 209.5, 211.3],        // Hawaii sunset, people on the beach (only that first shot)
+    [V1, 9.3, 11.4],           // canyon with a hiker
+    [V6, 73.5, 75.5],          // hot air balloon, everyone in the basket
+    [V3, 225.3, 227.3],        // Delicate Arch
+    [V3, 97.8, 99.6]           // hiker above the canyon, arms up
   ];
   var PHOTOS = [0, 3, 1, 2]; // sunset friends first, then the NWSE photos, round and round
   var F = 400, HOLD = 1000, SLOT = F + HOLD, LEAD = 3.8, POKE = 3600, N = 3;
   var slides = [].slice.call(document.querySelectorAll('.top-bg .slide')), box = document.querySelector('.top-video'),
-      layers = box.querySelectorAll('.vl'), P = [], ready = [], clip = [], role = [], since = [], pend = [], stall = [], poke = [],
-      cur = -1, nx = 0, s = 0, pi = 0, shown = 0, timer;
+      layers = box.querySelectorAll('.vl'), veil = box.querySelector('.yt-veil'), P = [], ready = [], clip = [], role = [], since = [], pend = [], stall = [], poke = [], rate = [],
+      cur = -1, nx = 0, s = 0, pi = 0, shown = 0, between = -100, waitT = 0, photoT = 0, timer; // before the first video, photos keep coming
+  function fadeOf(c) { return Math.round(Math.min(F, Math.max(100, (c[2] - c[1]) * 1000 / 3))); } // very short shots fade quicker
 
   function photo(n, instant) {
     slides.forEach(function (sl, i) {
@@ -1102,29 +1114,41 @@ document.addEventListener('click', function (e) {
   function load(i, c) {
     clip[i] = c; role[i] = 'prep';
     if (!ready[i]) { pend[i] = c; return; }
-    var p = P[i], at = Math.max(0, c[1] - LEAD); since[i] = 0; stall[i] = 0; poke[i] = Date.now();
+    var p = P[i], at = Math.max(0, c[1] - LEAD - 0.3); since[i] = 0; stall[i] = 0; poke[i] = Date.now(); rate[i] = 1;
+    if (c[3] === 'cue') { if (p._vid !== c[0]) { p._vid = c[0]; p.cueVideoById({ videoId: c[0], startSeconds: c[1] }); } else { p.pauseVideo(); p.seekTo(c[1], true); } return; }
+    if (c[3] === 'slow') { rate[i] = 0.25; at = Math.max(0, c[1] - LEAD * 0.25); }
     if (p._vid !== c[0]) { p._vid = c[0]; p.loadVideoById({ videoId: c[0], startSeconds: at }); }
     else { p.seekTo(at, true); p.playVideo(); }
+    if (rate[i] !== 1) p.setPlaybackRate(rate[i]);
   }
   // ready: played hidden long enough for YouTube's signs to be gone, and right at the start of its shot
   function isReady(i) {
     var c = clip[i];
+    if (c[3] === 'cue') return ready[i] && role[i] === 'prep' && P[i].getPlayerState() === 1;
     if (!ready[i] || role[i] !== 'prep' || !since[i] || Date.now() - since[i] < LEAD * 1000 - 150 || Date.now() - poke[i] < Math.min(POKE, LEAD * 1000)) return false;
-    var t = P[i].getCurrentTime(); return P[i].getPlayerState() === 1 && t >= c[1] - 0.3 && t <= c[1] + 1;
+    var t = P[i].getCurrentTime(); return P[i].getPlayerState() === 1 && t >= c[1] - 0.1 && t <= c[1] + Math.min(1, (c[2] - c[1]) * 0.3);
   }
   // how many ms until the waiting shot is ready (Infinity if it is not even playing yet)
   function eta(i) {
-    var c = clip[i]; if (!ready[i] || role[i] !== 'prep' || !since[i] || P[i].getPlayerState() !== 1) return Infinity;
+    var c = clip[i];
+    if (c[3] === 'cue') return ready[i] && role[i] === 'prep' ? 300 : Infinity;
+    if (!ready[i] || role[i] !== 'prep' || !since[i] || P[i].getPlayerState() !== 1) return Infinity;
     var t = P[i].getCurrentTime();
-    return Math.max((c[1] - 0.3 - t) * 1000, LEAD * 1000 - 150 - (Date.now() - since[i]), Math.min(POKE, LEAD * 1000) - (Date.now() - poke[i]), 0);
+    return Math.max((c[1] - 0.1 - t) * 1000 / (rate[i] || 1), LEAD * 1000 - 150 - (Date.now() - since[i]), Math.min(POKE, LEAD * 1000) - (Date.now() - poke[i]), 0);
   }
 
   // every 100 ms: keep the waiting shot playing at its start (hidden), never let a shown shot run past its end
   setInterval(function () {
+    var sh = cur >= 0 && role[cur] === 'show' && box.classList.contains('on');
+    veil.classList.toggle('on', !!(sh && Date.now() - Math.max(since[cur] || Date.now(), poke[cur] || 0) < 4400));
     for (var i = 0; i < N; i++) {
       if (!ready[i] || !clip[i] || role[i] === 'idle') continue;
       var p = P[i], c = clip[i], t = p.getCurrentTime ? p.getCurrentTime() : 0, st = p.getPlayerState();
+      if (role[i] === 'prep' && c[3] === 'cue') continue;
       if (role[i] === 'prep') {
+        if (rate[i] !== 1 && st === 1 && p.getPlaybackRate() !== rate[i]) p.setPlaybackRate(rate[i]);
+        // at its start but not shown yet: creep at quarter speed so it waits there (a speed change does not bring YouTube's sign back)
+        if (st === 1 && rate[i] === 1 && since[i] && t >= c[1] - 0.15) { rate[i] = 0.25; p.setPlaybackRate(0.25); }
         if (!document.hidden && (st === 2 || st === 5 || st === -1)) { p.playVideo(); poke[i] = Date.now(); }
         if (st === 3 && since[i]) { stall[i] = stall[i] || Date.now(); if (Date.now() - stall[i] > 5000) { p._vid = null; load(i, c); } } else stall[i] = 0;
         // ran past its start while waiting: jump back far enough that it is at its start again once YouTube's sign has gone
@@ -1137,24 +1161,37 @@ document.addEventListener('click', function (e) {
   function boundary() {
     clearTimeout(timer);
     var u = nx;
+    if (clip[u] && clip[u][3] === 'cue' && ready[u] && role[u] === 'prep' && P[u].getPlayerState() !== 1) P[u].playVideo();
     if (isReady(u)) return showShot(u);
     var w = eta(u);
-    if (w <= 900) { timer = setTimeout(function wait() { if (isReady(u)) showShot(u); else if (eta(u) <= 900) timer = setTimeout(wait, 50); else showPhoto(); }, 50); return; }
+    // after the second photo, that photo simply stays until the video is there (never 3 photos in a row)
+    if (between >= 2) {
+      if (!waitT) waitT = Date.now();
+      // a slow video: skip it this round after 7 s; a photo never stays longer than about 2.5 s (another photo comes instead)
+      if (Date.now() - waitT > 7000) { waitT = 0; if (ready[u]) P[u].pauseVideo(); role[u] = 'idle'; s = (s + 1) % SHOTS.length; load(u, SHOTS[s]); }
+      if (Date.now() - photoT > 2400) { showPhoto(); return; }
+      timer = setTimeout(boundary, 50); return;
+    }
+    // nearly there (sooner than another photo would take): keep this photo a little longer, so the shot's moment is not missed
+    if (w <= SLOT + 200) { timer = setTimeout(function wait() { if (isReady(u)) showShot(u); else if (eta(u) <= SLOT + 200) timer = setTimeout(wait, 50); else showPhoto(); }, 50); return; }
     showPhoto();
   }
-  function showPhoto() { photo(nextPhoto()); timer = setTimeout(boundary, SLOT); }
+  function showPhoto() { photo(nextPhoto()); between++; photoT = Date.now(); timer = setTimeout(boundary, SLOT); }
   function showShot(u) {
-    var c = clip[u], old = cur; cur = u; role[u] = 'show';
+    var c = clip[u], old = cur, f = fadeOf(c); cur = u; role[u] = 'show'; between = 0; waitT = 0;
+    if (rate[u] !== 1) { P[u].setPlaybackRate(1); rate[u] = 1; }
+    box.style.transitionDuration = f + 'ms';
+    veil.classList.toggle('on', Date.now() - Math.max(since[u] || Date.now(), poke[u] || 0) < 4400);
     for (var j = 0; j < N; j++) { layers[j].style.transition = 'none'; layers[j].classList.toggle('on', j === u); void layers[j].offsetWidth; layers[j].style.transition = ''; }
     box.classList.add('on'); document.body.classList.add('video-on');
     if (old >= 0 && old !== u && ready[old] && role[old] === 'show') { P[old].pauseVideo(); role[old] = 'idle'; }
     // once the video covers everything, the next photo is put in place underneath, so it is there when the video fades away
-    setTimeout(function () { if (cur === u && box.classList.contains('on')) photo(nextPhoto(), true); }, F + 100);
+    setTimeout(function () { if (cur === u && box.classList.contains('on')) photo(nextPhoto(), true); }, f + 30);
     // the next shot starts getting ready right away (hidden)
     s = (s + 1) % SHOTS.length; nx = (u + 1) % N; load(nx, SHOTS[s]);
     // v59: a video plays its whole moment (photos keep their 1 second), and has faded out just before the shot ends
-    var left = (c[2] - P[u].getCurrentTime()) * 1000 - F - 80;
-    timer = setTimeout(function () { hideVideo(); timer = setTimeout(boundary, SLOT); }, Math.max(F + 300, left));
+    var left = (c[2] - P[u].getCurrentTime()) * 1000 - f - 60;
+    timer = setTimeout(function () { hideVideo(); between = 1; photoT = Date.now(); setTimeout(function () { box.style.transitionDuration = ''; }, f + 50); timer = setTimeout(boundary, SLOT); }, Math.max(f, left));
   }
 
   window.onYouTubeIframeAPIReady = function () {
@@ -1167,7 +1204,7 @@ document.addEventListener('click', function (e) {
             if (e.data === 1) since[i] = since[i] || Date.now();
             else if (e.data !== 3) since[i] = 0;
             // a waiting shot got paused by the browser: start it again right away
-            if (e.data === 2 && role[i] === 'prep' && !document.hidden) { p.playVideo(); poke[i] = Date.now(); }
+            if (e.data === 2 && role[i] === 'prep' && !(clip[i] && clip[i][3] === 'cue') && !document.hidden) { p.playVideo(); poke[i] = Date.now(); }
             // a shown video stopped for some reason: take it away at once, so a pause sign never shows
             if (e.data !== 1 && e.data !== 3 && role[i] === 'show' && i === cur) cut(i);
           }
