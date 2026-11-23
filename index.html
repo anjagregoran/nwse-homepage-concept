@@ -740,6 +740,14 @@
   /* v51: Register Online at the bottom in NWSE's green, like the one in the top menu */
   .closing .ctas .btn:not(.line) { background: var(--green); color: #f4f1eb; }
   .closing .ctas .btn:not(.line):hover { background: #6f9020; }
+  /* v53: the bottom of the page more compact: call to action, slogan and footer closer together */
+  .closing { padding: clamp(64px, 7vw, 96px) var(--gutter) clamp(28px, 3vw, 40px); }
+  .closing h2 { font-size: clamp(2.1rem, 3.6vw, 3.3rem); }
+  .closing p.sub { max-width: 31em; margin: 16px auto 26px; font-size: 0.98rem; line-height: 1.7; }
+  .signoff { padding: clamp(28px, 3.4vw, 44px) var(--gutter) clamp(56px, 6vw, 80px); }
+  .signoff p { font-size: clamp(2.1rem, 4.6vw, 4.1rem); }
+  footer { padding-top: 48px; padding-bottom: 24px; }
+  .foot-bottom { margin-top: 32px; }
 </style>
 </head>
 <body class="home">
@@ -1058,7 +1066,7 @@ document.addEventListener('click', function (e) {
     { c: [V6, 142.2, 144.2] }     // school stage show, the dancing
     // photo, shot, photo, shot: so only one video ever gets ready at a time (two at once makes the second freeze for ~5 s)
   ];
-  var LEAD = 3.7, FIRST = 3, POKE = 3600, PHOTO = 4000, FADE = 1000, OUT = 650, WAIT = 10000, N = 3, L = SEQ.length;
+  var LEAD = 3.7, FIRST = 3, POKE = 3600, PHOTO = 1700, FADE = 1000, OUT = 650, WAIT = 10000, N = 3, L = SEQ.length;
   var slides = [].slice.call(document.querySelectorAll('.top-bg .slide')), box = document.querySelector('.top-video'),
       layers = box.querySelectorAll('.vl'), P = [], ready = [], lead = [], clip = [], role = [], since = [], pend = [], stall = [], poke = [],
       cur = N - 1, k = 0, timer, waiting = false, fails = 0, off = false, firstPhoto = true, firstShow = true;
@@ -1094,7 +1102,12 @@ document.addEventListener('click', function (e) {
     else { p.seekTo(at, true); p.playVideo(); }
   }
   function prepLater(i, c, wait) {
-    setTimeout(function () { if (!off && !(clip[i] === c && role[i] === 'prep') && !layers[i].classList.contains('on')) load(i, c); }, Math.max(0, wait));
+    setTimeout(function go() {
+      if (off || (clip[i] === c && role[i] === 'prep') || layers[i].classList.contains('on')) return;
+      // never two hidden videos getting ready at once (the second one freezes): wait until the other one is shown
+      for (var j = 0; j < N; j++) if (j !== i && role[j] === 'prep') { setTimeout(go, 150); return; }
+      load(i, c);
+    }, Math.max(0, wait));
   }
   // get the next shots ready so each one has played hidden for LEAD seconds by the time it is needed.
   // `start` = ms from now when item j+1 begins; `max` = how many shots ahead (always 1: a second hidden video loading at the same time freezes)
@@ -1166,7 +1179,7 @@ document.addEventListener('click', function (e) {
         timer = setTimeout(advance, Math.max(800, ms - OUT)); // starts fading to the photo just before the shot ends
         return;
       }
-      if (Date.now() - t0 > WAIT) { waiting = false; if (++fails >= 2) off = true; advance(); return; }
+      if (Date.now() - t0 > WAIT) { waiting = false; if (ready[u]) P[u].pauseVideo(); role[u] = 'idle'; if (++fails >= 2) off = true; advance(); return; }
       timer = setTimeout(poll, 100);
     })();
   }
