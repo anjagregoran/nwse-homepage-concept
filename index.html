@@ -781,6 +781,11 @@
     .closing .open-row { padding: 0 0 40px; }
     .closing .cta-side { border-left: 0; border-top: 1px solid rgba(30,43,27,.2); padding: 40px 0 0; }
   }
+  /* v69: soft focus (her pick C): each new photo comes in from a soft blur on top of the old one, like a camera finding focus */
+  .top-bg .slide { filter: blur(14px); transition: opacity 1.4s ease, filter 1.6s ease; }
+  .top-bg .slide.on { opacity: 1; filter: blur(0); z-index: 2; }
+  .top-bg .slide.prev { opacity: 1; filter: blur(0); z-index: 1; }
+  @media (prefers-reduced-motion: reduce) { .top-bg .slide { filter: none; transition: none; } }
 </style>
 </head>
 <body class="home">
@@ -804,7 +809,7 @@
 
 <main id="top">
   <section class="top">
-    <div class="top-bg" aria-hidden="true"><figure class="slide on" data-cap="Friends for life" data-student="lucas"><img src="img/stock/friends-mountain-sunset.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Game day" data-student="lena"><img src="img/nwse/2015_11_slider3.jpg" alt="" style="object-position:50% 35%"></figure><figure class="slide" data-cap="Weekends with your host family" data-student="ingrid"><img src="img/stock/camping-by-lake.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Sunsets together" data-student="matteo"><img src="img/stock/friends-watching-sunset.jpg" alt="" style="object-position:50% 45%"></figure><figure class="slide" data-cap="Adventures with friends" data-student="ingrid"><img src="img/stock/friends-mountain-trail.jpg" alt="" style="object-position:50% 45%"></figure><figure class="slide" data-cap="Beach bonfires with friends" data-student="lena"><img src="img/stock/beach-bonfire-guitar.jpg" alt="" style="object-position:50% 60%"></figure><figure class="slide" data-cap="Exploring the Pacific Northwest" data-student="haruto"><img src="img/nwse/2015_11_slider2b.jpg" alt="" style="object-position:50% 40%"></figure><figure class="slide" data-cap="Welcome home" data-student="lena"><img src="img/nwse/2015_11_slider1b.jpg" alt="" style="object-position:50% 30%"></figure></div>
+    <div class="top-bg" aria-hidden="true"><figure class="slide on" data-cap="Friends for life" data-student="lucas"><img src="img/stock/friends-mountain-sunset.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Game day" data-student="lena"><img src="img/nwse/2015_11_slider3.jpg" alt="" style="object-position:50% 35%"></figure><figure class="slide" data-cap="Weekends with your host family" data-student="ingrid"><img src="img/stock/camping-by-lake.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Sunsets together" data-student="matteo"><img src="img/stock/friends-watching-sunset.jpg" alt="" style="object-position:50% 45%"></figure><figure class="slide" data-cap="Adventures with friends" data-student="ingrid"><img src="img/stock/friends-mountain-trail.jpg" alt="" style="object-position:50% 45%"></figure><figure class="slide" data-cap="Beach bonfires with friends" data-student="lena"><img src="img/stock/beach-bonfire-guitar.jpg" alt="" style="object-position:50% 60%"></figure><figure class="slide" data-cap="Exploring the Pacific Northwest" data-student="haruto"><img src="img/nwse/2015_11_slider2b.jpg" alt="" style="object-position:50% 40%"></figure><figure class="slide" data-cap="Exploring together" data-student="lena"><img src="img/nwse/2014_06_HeroKidsWithMap.jpg" alt="" style="object-position:50% 40%"></figure></div>
     <div class="top-veil" aria-hidden="true"></div>
     <div class="top-copy">
       <h1><span class="mark">International Friendships That Last a Lifetime</span></h1>
