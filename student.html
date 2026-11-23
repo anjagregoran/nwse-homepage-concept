@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Exchange Student Registration | NorthWest Student Exchange</title>
 <meta name="robots" content="noindex">
+<script>
+/* a refresh always opens the page at the top, not where the visitor had scrolled to */
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  var n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (n && n.type === 'reload') {
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    window.addEventListener('load', function () { window.scrollTo(0, 0); });
+  }
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Italiana&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="pages.css?v=16">
 </head>
