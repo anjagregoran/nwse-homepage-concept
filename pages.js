@@ -26,6 +26,7 @@
     f.addEventListener('submit', function (e) { e.preventDefault(); f.classList.add('done'); });
   });
   // footer links are just for show
+  document.querySelectorAll('.aside-link').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
   document.querySelectorAll('footer .links a').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
   // links to homepage sections that are not built yet go nowhere
   document.querySelectorAll('a[href="index.html#more"], a[href="index.html#why"]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
