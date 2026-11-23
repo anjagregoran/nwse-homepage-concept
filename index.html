@@ -693,6 +693,42 @@
   .top-video { transition: opacity 1.2s ease; }
   .top-video .vl { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
   .top-video .vl.on { opacity: 1; }
+
+  .lang-btn { gap: 8px; padding: 8px 4px; }
+  .lang-btn span { display: none; }
+  .lang .flag { display: block; width: 22px; height: 15px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.14); }
+  .lang-btn .chev { width: 10px; height: 7px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: transform .2s; }
+  .lang.open .lang-btn .chev { transform: rotate(180deg); }
+  .lang-btn > svg:first-child { width: 22px; height: 15px; stroke: none; }
+  .lang-menu { min-width: 0; padding: 6px; display: grid; gap: 2px; left: 50%; right: auto; transform: translate(-50%, -4px); }
+  .lang.open .lang-menu { transform: translate(-50%, 0); }
+  .lang-menu button { display: block; background: none; border: 0; padding: 9px 10px; border-radius: 2px; cursor: pointer; }
+  .lang-menu button:hover { background: rgba(30,43,27,.07); }
+
+  /* v47: hero clips start hidden (no YouTube overlays); flags in the language switch; quieter student card; open-home as heading left, text right with a line beside it */
+  .top-video iframe { transform: translate(-50%, -50%) scale(1.3); }
+  body.home .top .teaser { gap: 18px; padding: 10px 28px 10px 10px; border-radius: 3px; background: rgba(251,249,244,.9); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 24px 60px rgba(10,14,9,.22); }
+  .top .teaser img { width: 76px; height: 76px; border-radius: 2px; }
+  .top .teaser small { font: 500 10px/1 "Instrument Sans", Arial, sans-serif; letter-spacing: .22em; color: #7d8577; margin-bottom: 8px; }
+  .top .teaser b { font: 400 1.6rem/1 var(--serif); margin: 0; }
+  .top .teaser em { display: block; font: 400 .85rem/1.2 "Instrument Sans", Arial, sans-serif; font-style: normal; color: #5d6559; margin: 5px 0 11px; }
+  .top .teaser i { display: inline-flex; align-items: center; gap: 9px; border: 0; font: 600 10px/1 "Instrument Sans", Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+  .top .teaser i svg { width: 15px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.3; transition: transform .3s; }
+  .top .teaser:hover i svg { transform: translateX(4px); }
+
+  .statement.open-home { text-align: left; }
+  .open-home .wrap { max-width: 1240px; display: grid; grid-template-columns: auto minmax(0, 36rem); justify-content: space-between; align-items: center; gap: clamp(40px, 6vw, 100px); }
+  .open-home h2 { font-size: clamp(1.5rem, 2.4vw, 2.35rem); }
+  .open-home h2::after { content: none; }
+  .open-home .txt { border-left: 1px solid rgba(30,43,27,.35); padding: 6px 0 6px clamp(22px, 2.6vw, 36px); }
+  .statement.open-home p { margin: 0; max-width: none; }
+  .statement.open-home p.dont { white-space: nowrap; font-size: clamp(1.15rem, 1.6vw, 1.4rem); margin-bottom: 16px; }
+  @media (max-width: 1000px) { .statement.open-home p.dont { white-space: normal; } }
+  /* slogan centered under the whole logo (emblem and name), same width as the logo */
+  header .logo { align-items: center; }
+  header .logo .tagline { margin-left: 0; }
+  @media (max-width: 860px) { header .logo .tagline { margin-left: 0; } }
+  @media (max-width: 1000px) { .open-home .wrap { grid-template-columns: 1fr; gap: 34px; } .open-home h2 { white-space: normal; } }
 </style>
 </head>
 <body class="home">
@@ -702,7 +738,7 @@
   <div class="wrap bar">
     <a class="logo" href="#top"><img class="lg-dark" src="img/logo.png" alt="NorthWest Student Exchange"><img class="lg-light" src="img/logo-light.png" alt="" aria-hidden="true"><span class="tagline">(Ex)change Your World</span></a>
     <nav class="nc"><a href="host.html">Host a Student</a><a href="student.html">Study Abroad</a><a href="coordinator.html">Local Coordinators</a><a href="#more">For Schools</a><a href="#why">About Us</a></nav>
-    <div class="nr"><div class="lang"><button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.2"/><path d="M1.8 10h16.4M10 1.8c2.3 2.4 3.4 5.1 3.4 8.2s-1.1 5.8-3.4 8.2M10 1.8C7.7 4.2 6.6 6.9 6.6 10s1.1 5.8 3.4 8.2"/></svg><span>EN</span></button><div class="lang-menu" role="menu"><a role="menuitem" class="cur" href="#">English</a><a role="menuitem" href="https://www.nwse.com/high-school-jahr-in-den-usa/" target="_blank" rel="noopener">Deutsch</a><a role="menuitem" href="https://www.nwse.com/アメリカ高校留学/" target="_blank" rel="noopener">日本語</a></div></div><div class="reg">
+    <div class="nr"><div class="lang"><button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language: English"><svg class="flag" viewBox="0 0 19 10" preserveAspectRatio="none" aria-hidden="true"><rect width="19" height="10" fill="#b22234"/><path d="M0 1.15h19M0 2.69h19M0 4.23h19M0 5.77h19M0 7.31h19M0 8.85h19" stroke="#fff" stroke-width=".77"/><rect width="7.6" height="5.38" fill="#3c3b6e"/><g fill="#fff"><circle cx="0.75" cy="0.70" r=".22"/><circle cx="1.97" cy="0.70" r=".22"/><circle cx="3.19" cy="0.70" r=".22"/><circle cx="4.41" cy="0.70" r=".22"/><circle cx="5.63" cy="0.70" r=".22"/><circle cx="6.85" cy="0.70" r=".22"/><circle cx="0.75" cy="1.70" r=".22"/><circle cx="1.97" cy="1.70" r=".22"/><circle cx="3.19" cy="1.70" r=".22"/><circle cx="4.41" cy="1.70" r=".22"/><circle cx="5.63" cy="1.70" r=".22"/><circle cx="6.85" cy="1.70" r=".22"/><circle cx="0.75" cy="2.70" r=".22"/><circle cx="1.97" cy="2.70" r=".22"/><circle cx="3.19" cy="2.70" r=".22"/><circle cx="4.41" cy="2.70" r=".22"/><circle cx="5.63" cy="2.70" r=".22"/><circle cx="6.85" cy="2.70" r=".22"/><circle cx="0.75" cy="3.70" r=".22"/><circle cx="1.97" cy="3.70" r=".22"/><circle cx="3.19" cy="3.70" r=".22"/><circle cx="4.41" cy="3.70" r=".22"/><circle cx="5.63" cy="3.70" r=".22"/><circle cx="6.85" cy="3.70" r=".22"/><circle cx="0.75" cy="4.70" r=".22"/><circle cx="1.97" cy="4.70" r=".22"/><circle cx="3.19" cy="4.70" r=".22"/><circle cx="4.41" cy="4.70" r=".22"/><circle cx="5.63" cy="4.70" r=".22"/><circle cx="6.85" cy="4.70" r=".22"/></g></svg><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 1.75 6 6.25l4.5-4.5"/></svg></button><div class="lang-menu" role="menu"><button type="button" role="menuitem" aria-label="Deutsch"><svg class="flag" viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#dd0000"/><rect y="2" width="5" height="1" fill="#ffce00"/></svg></button><button type="button" role="menuitem" aria-label="日本語"><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#fff"/><circle cx="1.5" cy="1" r=".6" fill="#bc002d"/></svg></button></div></div><div class="reg">
       <button class="btn reg-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="reg-menu">Register Online<svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 1.75 6 6.25l4.5-4.5"/></svg></button>
       <div class="reg-menu" id="reg-menu" role="menu">
         <a role="menuitem" href="host.html#register">Host Family Registration</a>
@@ -717,7 +753,7 @@
 <main id="top">
   <section class="top">
     <div class="top-bg" aria-hidden="true"><figure class="slide on" data-cap="Friends for life" data-student="lucas"><img src="img/stock/friends-mountain-sunset.jpg" alt="" style="object-position:50% 55%"></figure><figure class="slide" data-cap="Game day" data-student="lena"><img src="img/nwse/2015_11_slider3.jpg" alt="" style="object-position:50% 35%"></figure><figure class="slide" data-cap="Exploring the Pacific Northwest" data-student="haruto"><img src="img/nwse/2015_11_slider2b.jpg" alt="" style="object-position:50% 40%"></figure><figure class="slide" data-cap="Welcome home" data-student="ingrid"><img src="img/nwse/2015_11_slider1b.jpg" alt="" style="object-position:50% 30%"></figure></div>
-    <div class="top-video" aria-hidden="true"><div class="vl"><div id="hero-yt-a"></div></div><div class="vl"><div id="hero-yt-b"></div></div></div>
+    <div class="top-video" aria-hidden="true"><div class="vl"><div id="hero-yt-0"></div></div><div class="vl"><div id="hero-yt-1"></div></div><div class="vl"><div id="hero-yt-2"></div></div></div>
     <div class="top-veil" aria-hidden="true"></div>
     <div class="top-copy">
       <h1><span class="mark">International Friendships That Last a Lifetime</span></h1>
@@ -727,7 +763,7 @@
       </div>
     </div>
     <p class="media-cap">01 · Game day</p>
-    <button class="teaser" data-open="lucas"><img src="img/hobby-volleyball.jpg?v=2" alt="" style="object-position:50% 30%"><span><small>Looking for a host family</small><b>Lucas, 16 · Brazil 🇧🇷</b><i>Meet Lucas</i></span></button>
+    <button class="teaser" data-open="lucas"><img src="img/hobby-volleyball.jpg?v=2" alt="" style="object-position:50% 30%"><span><small>Looking for a host family</small><b>Lucas, 16</b><em>Brazil</em><i>Meet Lucas<svg viewBox="0 0 16 10" aria-hidden="true"><path d="M1 5h13M10 1l4 4-4 4"/></svg></i></span></button>
     <a class="top-sub" href="#students">Meet Our Students<span class="cue-line" aria-hidden="true"></span></a>
   </section>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="chroma" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
@@ -741,9 +777,11 @@
   <div class="statement open-home">
     <div class="wrap">
       <h2>All you need: <em>an open home</em></h2>
+      <div class="txt">
       <p class="dont">You don’t have to have children. You don’t have to travel.</p>
       <p>You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
       <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
+      </div>
     </div>
   </div>
 
@@ -994,31 +1032,31 @@ document.addEventListener('click', function (e) {
 }, true);
 </script>
 <script>
-/* v46 hero: a few NWSE YouTube clips, then one photo, then a few clips, then a photo, on a loop. Muted, no controls.
-   Clips are the ones Anja picked in clip-picker.html (22 Nov 2026). Two players take turns, so the next clip is
-   already waiting and the change is a soft cross-fade; a player is only visible while it is really playing. */
+/* v47 hero: NWSE YouTube clips with a photo in between, on a loop. Muted, no controls.
+   YouTube shows its title bar and a pause sign for a few seconds whenever a video starts or is resumed, so every clip
+   starts playing hidden a few seconds early (LEAD) and only fades in once those overlays have gone. Three players take
+   turns: one visible, one fading out, one getting the next clip ready. Before: version-46-before-hidden-lead.html */
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var V6 = '1DHX-Fgk8RE', V1 = 'BtidBqNhTBM', V4 = 'bWa517HnLS4';
-  // {p: photo number in .top-bg} or {c: [video, start, end]}
   var SEQ = [
-    { p: 0 },                                   // sunset friends, only briefly, then straight into video
-    { c: [V6, 61.5, 65.8] },                    // lake at sunset
-    { c: [V1, 0.5, 6.5] },                      // desert road trip
-    { c: [V1, 8.5, 12.5] },                     // canyon view
-    { p: 1 },                                   // NWSE: game day
-    { c: [V6, 79, 86] },                        // singing in the car
-    { c: [V6, 92, 95.5] },                      // dancing at home
-    { c: [V6, 96, 98.5] },                      // in the backyard
-    { p: 2 },                                   // NWSE photo
-    { c: [V4, 210, 220] },                      // Hawaii sunset and waves
-    { c: [V6, 142, 145.5] },                    // school stage show
-    { p: 3 }                                    // NWSE photo
+    { p: 0 },                     // sunset friends, shows until the first clip is ready
+    { c: [V6, 61.5, 65.8] },      // lake at sunset
+    { c: [V1, 0.5, 6.5] },        // desert road trip
+    { c: [V1, 8.5, 12.5] },       // canyon view
+    { p: 1 },                     // NWSE: game day
+    { c: [V6, 79, 86] },          // singing in the car
+    { c: [V6, 92, 95.5] },        // dancing at home
+    { c: [V6, 96, 98.5] },        // in the backyard
+    { p: 2 },                     // NWSE photo
+    { c: [V4, 210, 220] },        // Hawaii sunset and waves
+    { c: [V6, 142, 145.5] },      // school stage show
+    { p: 3 }                      // NWSE photo
   ];
-  var FIRST = 1200, PHOTO = 4200, FADE = 1000, WAIT = 6000;
+  var LEAD = 3, SLACK = 1.4, PHOTO = 4200, FADE = 1000, WAIT = 9000, N = 3;
   var slides = [].slice.call(document.querySelectorAll('.top-bg .slide')), box = document.querySelector('.top-video'),
-      layers = box.querySelectorAll('.vl'), P = [null, null], ready = [false, false], cued = [null, null],
-      last = 1, k = 0, first = true, timer, fails = 0, off = false;
+      layers = box.querySelectorAll('.vl'), P = [], ready = [], prep = [], pend = [], since = [],
+      cur = N - 1, k = 0, timer, prepT, fails = 0, off = false;
 
   function photo(n) {
     slides.forEach(function (s, i) {
@@ -1027,39 +1065,39 @@ document.addEventListener('click', function (e) {
     slides[n].classList.remove('prev'); slides[n].classList.add('on');
   }
   function nextClip(j) { for (var x = 1; x <= SEQ.length; x++) { var it = SEQ[(j + x) % SEQ.length]; if (it.c) return it.c; } }
-  // load a clip into a hidden player and hold it on its first frame
-  function cue(i, c) {
-    var p = P[i]; if (!ready[i] || !c) return;
-    cued[i] = c; p._prep = true;
-    if (p._vid !== c[0]) { p._vid = c[0]; p.loadVideoById({ videoId: c[0], startSeconds: c[1] }); }
-    else { p.seekTo(c[1], true); p.playVideo(); }
+  // start a clip playing (hidden) LEAD seconds before the part we want to show
+  function load(i, c) {
+    if (!ready[i]) { pend[i] = c; return; }
+    var p = P[i], at = Math.max(0, c[1] - LEAD); prep[i] = c; since[i] = 0;
+    if (p._vid !== c[0]) { p._vid = c[0]; p.loadVideoById({ videoId: c[0], startSeconds: at }); }
+    else { p.seekTo(at, true); p.playVideo(); }
   }
+  function hideVideo() { box.classList.remove('on'); document.body.classList.remove('video-on'); }
   function advance() { k = (k + 1) % SEQ.length; step(); }
   function step() {
-    clearTimeout(timer);
-    var it = SEQ[k];
+    clearTimeout(timer); clearTimeout(prepT);
+    var it = SEQ[k], nxt = (cur + 1) % N;
     if (it.p !== undefined) {
-      photo(it.p);
-      box.classList.remove('on'); document.body.classList.remove('video-on');
-      var was = last;
-      setTimeout(function () { if (!box.classList.contains('on') && P[was] && ready[was]) P[was].pauseVideo(); }, FADE + 400);
-      timer = setTimeout(advance, first ? FIRST : PHOTO); first = false;
+      photo(it.p); hideVideo();
+      var was = cur; setTimeout(function () { if (!box.classList.contains('on') && ready[was]) P[was].pauseVideo(); }, FADE + 400);
+      if (!off && prep[nxt] !== nextClip(k)) prepT = setTimeout(function () { load(nxt, nextClip(k)); }, Math.max(0, PHOTO - (LEAD + SLACK) * 1000));
+      timer = setTimeout(advance, k === 0 && !step.ran ? 600 : PHOTO); step.ran = true;
       return;
     }
     if (off) { advance(); return; }
-    var c = it.c, u = 1 - last, kk = k, t0 = Date.now(), asked = false;
+    var c = it.c, u = nxt, t0 = Date.now(), kk = k;
+    if (prep[u] !== c) load(u, c);
     (function poll() {
       var p = P[u];
-      if (p && ready[u]) {
-        if (!asked) { asked = true; if (cued[u] !== c) { cue(u, c); } p._prep = false; p.playVideo(); }
-        if (p.getPlayerState && p.getPlayerState() === 1) {
-          fails = 0; last = u;
-          layers[u].classList.add('on'); layers[1 - u].classList.remove('on');
-          box.classList.add('on'); document.body.classList.add('video-on');
-          setTimeout(function () { var o = 1 - u; if (P[o] && ready[o]) { P[o].pauseVideo(); cue(o, nextClip(kk)); } }, FADE + 200);
-          timer = setTimeout(advance, Math.max(1500, (c[2] - c[1]) * 1000));
-          return;
-        }
+      if (ready[u] && since[u] && Date.now() - since[u] >= LEAD * 1000 - 150 && p.getCurrentTime() >= c[1] - 0.3) {
+        var old = cur; cur = u; fails = 0;
+        layers[u].classList.add('on'); for (var j = 0; j < N; j++) if (j !== u) layers[j].classList.remove('on');
+        box.classList.add('on'); document.body.classList.add('video-on');
+        setTimeout(function () { if (ready[old] && old !== cur) P[old].pauseVideo(); }, FADE + 300);
+        var left = Math.max(1500, (c[2] - p.getCurrentTime()) * 1000), n2 = (u + 1) % N, nc = SEQ[(kk + 1) % SEQ.length].c;
+        if (nc) prepT = setTimeout(function () { load(n2, nc); }, Math.max(0, left - (LEAD + SLACK) * 1000));
+        timer = setTimeout(advance, left);
+        return;
       }
       if (Date.now() - t0 > WAIT) { if (++fails >= 2) off = true; advance(); return; }
       timer = setTimeout(poll, 100);
@@ -1067,23 +1105,24 @@ document.addEventListener('click', function (e) {
   }
 
   window.onYouTubeIframeAPIReady = function () {
-    ['hero-yt-a', 'hero-yt-b'].forEach(function (id, i) {
-      var p = P[i] = new YT.Player(id, {
+    for (var i = 0; i < N; i++) (function (i) {
+      var p = P[i] = new YT.Player('hero-yt-' + i, {
         playerVars: { autoplay: 0, mute: 1, controls: 0, disablekb: 1, fs: 0, rel: 0, playsinline: 1, iv_load_policy: 3, cc_load_policy: 0, modestbranding: 1 },
         events: {
-          onReady: function () { p.mute(); ready[i] = true; var CL = SEQ.filter(function (x) { return x.c; }).map(function (x) { return x.c; }); cue(i, CL[i]); },
+          onReady: function () { p.mute(); ready[i] = true; if (pend[i]) { load(i, pend[i]); pend[i] = null; } },
           onStateChange: function (e) {
-            if (e.data === 1 && p._prep) { p._prep = false; p.pauseVideo(); }
-            // a visible player that stops for any reason fades out, so a black frame or pause sign never shows
-            if (e.data !== 1 && e.data !== 3 && i === last && !p._prep && box.classList.contains('on') && layers[i].classList.contains('on')) { box.classList.remove('on'); document.body.classList.remove('video-on'); }
+            since[i] = e.data === 1 ? (since[i] || Date.now()) : 0;
+            // the visible player stopped for some reason: fade to the photo so a pause sign or black frame never shows
+            if (e.data !== 1 && i === cur && layers[i].classList.contains('on') && box.classList.contains('on')) hideVideo();
           }
         }
       });
-    });
+    })(i);
   };
   document.addEventListener('visibilitychange', function () { if (!document.hidden) { off = false; fails = 0; } });
-  function go() { step(); }
-  if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
+  // first clip starts loading right away (hidden) while the first photo shows
+  load(0, nextClip(0)); cur = N - 1;
+  step();
   var s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
 })();
 </script>
@@ -1094,6 +1133,7 @@ document.addEventListener('click', function (e) {
   b.addEventListener('click', function (e) { e.stopPropagation(); set(!l.classList.contains('open')); });
   document.addEventListener('click', function (e) { if (!l.contains(e.target)) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  l.querySelectorAll('.lang-menu button').forEach(function (x) { x.addEventListener('click', function () { set(false); }); });
 })();
 </script>
 <a class="concept-tag" href="#" onclick="return false" style="position:fixed;left:14px;bottom:14px;z-index:9999;padding:7px 12px;border-radius:999px;background:rgba(20,26,18,.78);color:#f6f2ea;font:500 11px/1.2 'Instrument Sans',Arial,sans-serif;letter-spacing:.04em;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">Design concept by Anja for NorthWest Student Exchange</a>

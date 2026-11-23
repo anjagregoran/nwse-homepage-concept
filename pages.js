@@ -19,7 +19,7 @@
     lb.addEventListener('click', function (e) { e.stopPropagation(); ls(!l.classList.contains('open')); });
     document.addEventListener('click', function (e) { if (!l.contains(e.target)) ls(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ls(false); });
-    l.querySelector('a.cur').addEventListener('click', function (e) { e.preventDefault(); ls(false); }); }
+    l.querySelectorAll('.lang-menu button').forEach(function (x) { x.addEventListener('click', function () { ls(false); }); }); }
 
   // preview only: the form just shows the thank-you note, nothing is sent anywhere
   document.querySelectorAll('form.mini').forEach(function (f) {
