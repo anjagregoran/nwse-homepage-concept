@@ -811,6 +811,10 @@
   .closing .open-row p + p { margin-top: 12px; }
   /* v79: "an open home" and "hosting" both in the lighter green "hosting" had before (green-deep), thin letters kept on "an open home" */
   .closing .open-row h2, .closing .cta-side h2 em { color: var(--green-deep); }
+  /* v80: Anja picked 5: small italic 01, 02, 03 instead of the tick in "In the USA I would love to". Before: version-80-before-dream-numbers.html */
+  .pf-dreams { counter-reset: dream; }
+  .pf-dreams li { counter-increment: dream; padding-left: 40px; }
+  .pf-dreams li::before { content: "0" counter(dream); background: none; width: auto; height: auto; border-radius: 0; left: 4px; top: 50%; transform: translateY(-50%); display: block; font: italic 400 1.35rem/1 var(--serif); color: var(--soft); }
 </style>
 </head>
 <body class="home">
