@@ -1068,6 +1068,26 @@ document.addEventListener('click', function (e) {
   l.querySelectorAll('.lang-menu button').forEach(function (x) { x.addEventListener('click', function () { set(false); }); });
 })();
 </script>
+<script>
+/* v66: Learn More glides down slowly and smoothly to "Find your place" (about 1.4 s, soft start and soft stop) */
+(function () {
+  var a = document.querySelector('.top .pill[href="#ways"]'); if (!a) return;
+  a.addEventListener('click', function (e) {
+    var el = document.getElementById('ways'); if (!el) return;
+    e.preventDefault();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.scrollIntoView(); return; }
+    var root = document.documentElement, from = window.scrollY,
+        to = el.getBoundingClientRect().top + from - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0),
+        d = 1400, t0 = performance.now();
+    root.style.scrollBehavior = 'auto';
+    function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+    (function step(now) {
+      var k = Math.min(1, (now - t0) / d); window.scrollTo(0, from + (to - from) * ease(k));
+      if (k < 1) requestAnimationFrame(step); else root.style.scrollBehavior = '';
+    })(t0);
+  });
+})();
+</script>
 <a class="concept-tag" href="#" onclick="return false" style="position:fixed;left:14px;bottom:14px;z-index:9999;padding:7px 12px;border-radius:999px;background:rgba(20,26,18,.78);color:#f6f2ea;font:500 11px/1.2 'Instrument Sans',Arial,sans-serif;letter-spacing:.04em;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">Design concept by Anja for NorthWest Student Exchange</a>
 </body>
 </html>
