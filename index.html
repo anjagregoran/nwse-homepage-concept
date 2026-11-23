@@ -765,6 +765,11 @@
   .closing .open-row p + p { margin-top: 10px; }
   .closing .open-row p.dont { font: italic 400 clamp(1.15rem, 1.5vw, 1.35rem)/1.4 var(--serif); color: var(--ink); margin-bottom: 14px; }
   @media (max-width: 900px) { .closing .open-row { grid-template-columns: 1fr; gap: 26px; } .closing .open-row h2 { white-space: normal; } }
+  /* v58: same rhythm for everything: 0.4 s fade in, a full second on screen, 0.4 s fade out. A new photo fades in on top of the old one */
+  .top-bg .slide { transition: opacity .4s ease; }
+  .top-bg .slide.on { z-index: 2; }
+  .top-bg .slide.prev { opacity: 1; z-index: 1; }
+  .top-video, .top-video .vl { transition: opacity .4s ease; }
 </style>
 </head>
 <body class="home">
@@ -1060,149 +1065,97 @@ document.addEventListener('click', function (e) {
 }, true);
 </script>
 <script>
-/* v50 hero: Anja's picked shots from NWSE's YouTube videos with NWSE photos in between, on a loop. Muted, no controls, normal speed.
-   YouTube shows its title bar and a pause sign whenever a video starts, pauses or jumps, so:
-   every shot starts playing hidden a few seconds early and fades in only after those have gone,
-   and a visible video is never paused, jumped or slowed: each shot plays once and fades out exactly as it ends.
-   Only one hidden video gets ready at a time (two at once makes one freeze). Before: version-53-before-three-car-parts.html */
+/* v58 hero: Anja's picked shots from NWSE's YouTube videos with NWSE photos in between, on a loop. Muted, no controls, normal speed.
+   Everything has the same rhythm: fade in (0.4 s), fully on screen for 1 second, fade out (0.4 s), photos and videos alike.
+   YouTube shows its title bar and a pause sign for about 4 s whenever a video starts or jumps, so every shot plays hidden
+   first and only fades in once those have gone. Only one hidden video gets ready at a time (two at once makes one freeze),
+   so while the next shot gets ready, photos keep coming in the same rhythm. Before: version-58-before-same-rhythm.html */
 (function () {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var V6 = '1DHX-Fgk8RE', V3 = '3yiepRetCw4';
-  // [video, start s, end s]. Times measured on the real player, each one a single scene.
-  var SEQ = [
-    { p: 0 },                     // sunset friends
-    { c: [V6, 78.5, 81.3] },      // car 1 of 3: laughing in front of the camera (the longest, so it opens)
-    { p: 1 },                     // NWSE photo
-    { c: [V3, 97.8, 99.6] },      // hiker above the canyon, arms up
-    { p: 2 },                     // NWSE photo
-    { c: [V6, 82.0, 84.1] },      // car 2 of 3: dancing in her seat
-    { p: 3 },                     // NWSE photo
-    { c: [V6, 73.5, 75.5] },      // hot air balloon, everyone in the basket
-    { p: 1 },                     // NWSE photo
-    { c: [V6, 84.3, 86.0] },      // car 3 of 3: laughing, leaning back in the chair
-    { p: 2 },                     // NWSE photo
-    { c: [V6, 142.2, 144.2] }     // school stage show, the dancing
-    // photo, shot, photo, shot: only one video ever gets ready at a time (two at once makes the second freeze for ~5 s).
-    // The three parts of the car shot are kept far apart.
+  // [video, start s, end s]. Times measured on the real player, each one a single scene. The three car parts are kept apart.
+  var SHOTS = [
+    [V6, 78.5, 81.3],     // car 1 of 3: laughing in front of the camera
+    [V3, 97.8, 99.6],     // hiker above the canyon, arms up
+    [V6, 82.0, 84.1],     // car 2 of 3: dancing in her seat
+    [V6, 73.5, 75.5],     // hot air balloon, everyone in the basket
+    [V6, 84.3, 86.0],     // car 3 of 3: laughing, leaning back in the chair
+    [V6, 142.2, 144.2]    // school stage show, the dancing
   ];
-  var LEAD = 3.7, FIRST = 3, POKE = 3600, PHOTO = 1700, FADE = 1000, OUT = 650, WAIT = 7000, N = 3, L = SEQ.length;
+  var PHOTOS = [0, 3, 1, 2]; // sunset friends first, then the NWSE photos, round and round
+  var F = 400, HOLD = 1000, SLOT = F + HOLD, LEAD = 3.8, POKE = 3600, N = 3;
   var slides = [].slice.call(document.querySelectorAll('.top-bg .slide')), box = document.querySelector('.top-video'),
-      layers = box.querySelectorAll('.vl'), P = [], ready = [], lead = [], clip = [], role = [], since = [], pend = [], stall = [], poke = [],
-      cur = N - 1, k = 0, timer, waiting = false, fails = 0, off = false, firstPhoto = true, firstShow = true;
+      layers = box.querySelectorAll('.vl'), P = [], ready = [], clip = [], role = [], since = [], pend = [], stall = [], poke = [],
+      cur = -1, nx = 0, s = 0, pi = 0, shown = 0, timer;
 
-  function photo(n) {
-    slides.forEach(function (s, i) {
-      if (i !== n && s.classList.contains('on')) { s.classList.remove('on'); s.classList.add('prev'); setTimeout(function () { s.classList.remove('prev'); }, 2300); }
+  function photo(n, instant) {
+    slides.forEach(function (sl, i) {
+      if (instant) sl.style.transition = 'none';
+      if (i === n) { sl.classList.remove('prev'); sl.classList.add('on'); }
+      else if (sl.classList.contains('on') && !instant) { sl.classList.remove('on'); sl.classList.add('prev'); setTimeout(function () { sl.style.transition = 'none'; sl.classList.remove('prev'); void sl.offsetWidth; sl.style.transition = ''; }, F + 80); }
+      else sl.classList.remove('on', 'prev');
+      if (instant) { void sl.offsetWidth; sl.style.transition = ''; }
     });
-    slides[n].classList.remove('prev'); slides[n].classList.add('on');
   }
-  // put the next photo in place underneath while a video covers it, so it is already there when the video fades away
-  function under(n) {
-    slides.forEach(function (s, i) { s.style.transition = 'none'; s.classList.remove('prev'); s.classList.toggle('on', i === n); void s.offsetWidth; s.style.transition = ''; });
-  }
-  function nextPhoto(j) { for (var x = 1; x <= L; x++) { var it = SEQ[(j + x) % L]; if (it.p !== undefined) return it.p; } }
-  // fade a shown video away; a short one fades a little faster so it is gone before its shot ends
-  function fadeAway(el, i) {
-    var d = Math.max(0.25, Math.min(FADE / 1000, clip[i][2] - P[i].getCurrentTime() - 0.1));
-    el.style.transitionDuration = d + 's'; setTimeout(function () { el.style.transitionDuration = ''; }, d * 1000 + 300);
-  }
-  function seen(i) { return layers[i].classList.contains('on') && box.classList.contains('on'); }
+  function nextPhoto() { var n = PHOTOS[pi % PHOTOS.length]; pi++; if (n === shown && PHOTOS.length > 1) { n = PHOTOS[pi % PHOTOS.length]; pi++; } shown = n; return n; }
   function hideVideo() { box.classList.remove('on'); document.body.classList.remove('video-on'); }
-  // take a layer away at once, without a fade (used only if a shown video would otherwise stop or run on)
-  function cut(i) {
-    var l = layers[i]; l.style.transition = 'none'; l.classList.remove('on'); void l.offsetWidth; l.style.transition = '';
-    if (i === cur) hideVideo();
-  }
-  function load(i, c, ld) {
-    if (!ready[i]) { pend[i] = c; clip[i] = c; role[i] = 'prep'; lead[i] = ld || LEAD; return; }
-    lead[i] = ld || LEAD; var p = P[i], at = Math.max(0, c[1] - lead[i]);
-    clip[i] = c; role[i] = 'prep'; since[i] = 0; stall[i] = 0; poke[i] = Date.now();
+  function cut(i) { if (i === cur) { box.style.transition = 'none'; hideVideo(); void box.offsetWidth; box.style.transition = ''; } }
+  function load(i, c) {
+    clip[i] = c; role[i] = 'prep';
+    if (!ready[i]) { pend[i] = c; return; }
+    var p = P[i], at = Math.max(0, c[1] - LEAD); since[i] = 0; stall[i] = 0; poke[i] = Date.now();
     if (p._vid !== c[0]) { p._vid = c[0]; p.loadVideoById({ videoId: c[0], startSeconds: at }); }
     else { p.seekTo(at, true); p.playVideo(); }
   }
-  function prepLater(i, c, wait) {
-    setTimeout(function go() {
-      if (off || (clip[i] === c && role[i] === 'prep') || layers[i].classList.contains('on')) return;
-      // never two hidden videos getting ready at once (the second one freezes): wait until the other one is shown
-      for (var j = 0; j < N; j++) if (j !== i && role[j] === 'prep') { setTimeout(go, 150); return; }
-      load(i, c);
-    }, Math.max(0, wait));
-  }
-  // get the next shots ready so each one has played hidden for LEAD seconds by the time it is needed.
-  // `start` = ms from now when item j+1 begins; `max` = how many shots ahead (always 1: a second hidden video loading at the same time freezes)
-  function plan(j, from, start, max) {
-    var need = start, n = 0;
-    for (var x = 1; x <= L && n < max; x++) {
-      var it = SEQ[(j + x) % L];
-      if (it.p !== undefined) { need += PHOTO; continue; }
-      n++;
-      var wait = need - (LEAD + 0.5) * 1000;
-      prepLater((from + n) % N, it.c, wait);
-      need += (it.c[2] - it.c[1]) * 1000 - OUT;
-    }
-  }
-  // ready to show: played hidden for LEAD s, nothing done to it for POKE ms, and at its start.
-  // YouTube shows its title and a pause sign for about 3.5 to 4 s whenever a video starts or jumps (measured), so both wait that long
-  function isReady(i, c) {
-    if (!ready[i] || clip[i] !== c || role[i] !== 'prep' || !since[i] || Date.now() - since[i] < lead[i] * 1000 - 150 || Date.now() - poke[i] < Math.min(POKE, lead[i] * 1000)) return false;
+  // ready: played hidden long enough for YouTube's signs to be gone, and right at the start of its shot
+  function isReady(i) {
+    var c = clip[i];
+    if (!ready[i] || role[i] !== 'prep' || !since[i] || Date.now() - since[i] < LEAD * 1000 - 150 || Date.now() - poke[i] < Math.min(POKE, LEAD * 1000)) return false;
     var t = P[i].getCurrentTime(); return P[i].getPlayerState() === 1 && t >= c[1] - 0.3 && t <= c[1] + 1;
   }
+  // how many ms until the waiting shot is ready (Infinity if it is not even playing yet)
+  function eta(i) {
+    var c = clip[i]; if (!ready[i] || role[i] !== 'prep' || !since[i] || P[i].getPlayerState() !== 1) return Infinity;
+    var t = P[i].getCurrentTime();
+    return Math.max((c[1] - 0.3 - t) * 1000, LEAD * 1000 - 150 - (Date.now() - since[i]), Math.min(POKE, LEAD * 1000) - (Date.now() - poke[i]), 0);
+  }
 
-  // every 100 ms: keep waiting shots at their start (hidden), never let a shown shot run past its end
+  // every 100 ms: keep the waiting shot playing at its start (hidden), never let a shown shot run past its end
   setInterval(function () {
     for (var i = 0; i < N; i++) {
       if (!ready[i] || !clip[i] || role[i] === 'idle') continue;
       var p = P[i], c = clip[i], t = p.getCurrentTime ? p.getCurrentTime() : 0, st = p.getPlayerState();
       if (role[i] === 'prep') {
-        if (!document.hidden && st === 2) { p.playVideo(); poke[i] = Date.now(); }
+        if (!document.hidden && (st === 2 || st === 5 || st === -1)) { p.playVideo(); poke[i] = Date.now(); }
         if (st === 3 && since[i]) { stall[i] = stall[i] || Date.now(); if (Date.now() - stall[i] > 5000) { p._vid = null; load(i, c); } } else stall[i] = 0;
-        // ran past its start while waiting: jump back far enough that it is at its start again once YouTube's sign after the jump has gone
+        // ran past its start while waiting: jump back far enough that it is at its start again once YouTube's sign has gone
         if (since[i] && Date.now() - since[i] >= LEAD * 1000 && t > c[1] + 1) { p.seekTo(Math.max(0, c[1] - POKE / 1000), true); poke[i] = Date.now(); }
-      } else if (role[i] === 'show' && layers[i].classList.contains('on') && t > c[2] - 0.05) cut(i);
-      // the next shot is late: fade gently to the photo underneath before this one ends, instead of a hard cut
-      if (role[i] === 'show' && i === cur && waiting && seen(i) && t > c[2] - 0.6) { fadeAway(box, i); hideVideo(); }
+      } else if (role[i] === 'show' && i === cur && box.classList.contains('on') && t > c[2] - 0.05) cut(i);
     }
   }, 100);
 
-  function advance() { k = (k + 1) % L; step(); }
-  function step() {
+  // a photo has had its fade in and its full second: show the next shot if it is ready (or nearly), otherwise one more photo
+  function boundary() {
     clearTimeout(timer);
-    var it = SEQ[k];
-    if (it.p !== undefined) {
-      if (ready[cur] && role[cur] === 'show' && seen(cur)) fadeAway(box, cur);
-      photo(it.p); hideVideo();
-      var was = cur; setTimeout(function () { if (!seen(was) && ready[was] && role[was] === 'show') { layers[was].classList.remove('on'); P[was].pauseVideo(); role[was] = 'idle'; } }, FADE + 400);
-      // first visit: the sunset photo only stays a moment, then another photo while the first video gets ready
-      if (firstPhoto) setTimeout(function () { if (!box.classList.contains('on')) photo(3); }, 1400);
-      var hold = firstPhoto ? 600 : PHOTO; firstPhoto = false;
-      if (!off) plan(k, cur, hold, 1);
-      timer = setTimeout(advance, hold);
-      return;
-    }
-    if (off) { advance(); return; }
-    var c = it.c, u = (cur + 1) % N, t0 = Date.now(), kk = k;
-    if (!(clip[u] === c && role[u] === 'prep')) load(u, c);
-    waiting = true;
-    (function poll() {
-      if (isReady(u, c)) {
-        waiting = false;
-        var old = cur; cur = u; fails = 0; role[u] = 'show';
-        if (ready[old] && role[old] === 'show' && seen(old)) fadeAway(layers[old], old);
-        layers[u].classList.add('on'); for (var j = 0; j < N; j++) if (j !== u) layers[j].classList.remove('on');
-        // coming from a photo: the layer is switched on at once, so only one fade runs and the shot is clear sooner
-        if (!firstShow && !box.classList.contains('on')) { layers[u].style.transition = 'none'; layers[u].classList.add('on'); void layers[u].offsetWidth; layers[u].style.transition = ''; }
-        if (firstShow) { firstShow = false; box.style.transitionDuration = layers[u].style.transitionDuration = '1.8s'; setTimeout(function () { box.style.transitionDuration = layers[u].style.transitionDuration = ''; }, 2000); }
-        box.classList.add('on'); document.body.classList.add('video-on');
-        // the shot before fades out underneath, then stops once nobody can see it
-        setTimeout(function () { if (old !== cur && ready[old] && role[old] === 'show' && !layers[old].classList.contains('on')) { P[old].pauseVideo(); role[old] = 'idle'; } if (seen(u)) under(nextPhoto(kk)); }, FADE + 300);
-        var ms = (c[2] - P[u].getCurrentTime()) * 1000;
-        if (!off) plan(kk, u, ms - OUT, 1);
-        timer = setTimeout(advance, Math.max(800, ms - OUT)); // starts fading to the photo just before the shot ends
-        return;
-      }
-      if (Date.now() - t0 > WAIT) { waiting = false; if (ready[u]) P[u].pauseVideo(); role[u] = 'idle'; if (document.hidden) off = true; advance(); return; } // a late shot is skipped; videos only rest while nobody can see the page
-      timer = setTimeout(poll, 100);
-    })();
+    var u = nx;
+    if (isReady(u)) return showShot(u);
+    var w = eta(u);
+    if (w <= 900) { timer = setTimeout(function wait() { if (isReady(u)) showShot(u); else if (eta(u) <= 900) timer = setTimeout(wait, 50); else showPhoto(); }, 50); return; }
+    showPhoto();
+  }
+  function showPhoto() { photo(nextPhoto()); timer = setTimeout(boundary, SLOT); }
+  function showShot(u) {
+    var c = clip[u], old = cur; cur = u; role[u] = 'show';
+    for (var j = 0; j < N; j++) { layers[j].style.transition = 'none'; layers[j].classList.toggle('on', j === u); void layers[j].offsetWidth; layers[j].style.transition = ''; }
+    box.classList.add('on'); document.body.classList.add('video-on');
+    if (old >= 0 && old !== u && ready[old] && role[old] === 'show') { P[old].pauseVideo(); role[old] = 'idle'; }
+    // once the video covers everything, the next photo is put in place underneath, so it is there when the video fades away
+    setTimeout(function () { if (cur === u && box.classList.contains('on')) photo(nextPhoto(), true); }, F + 100);
+    // the next shot starts getting ready right away (hidden)
+    s = (s + 1) % SHOTS.length; nx = (u + 1) % N; load(nx, SHOTS[s]);
+    // fade in, a full second, then fade out, always finished before the shot ends
+    var left = (c[2] - P[u].getCurrentTime()) * 1000 - F - 80;
+    timer = setTimeout(function () { hideVideo(); timer = setTimeout(boundary, SLOT); }, Math.max(F + 300, Math.min(SLOT, left)));
   }
 
   window.onYouTubeIframeAPIReady = function () {
@@ -1210,23 +1163,22 @@ document.addEventListener('click', function (e) {
       var p = P[i] = new YT.Player('hero-yt-' + i, {
         playerVars: { autoplay: 0, mute: 1, controls: 0, disablekb: 1, fs: 0, rel: 0, playsinline: 1, iv_load_policy: 3, cc_load_policy: 0, modestbranding: 1 },
         events: {
-          onReady: function () { p.mute(); ready[i] = true; if (pend[i]) { var c = pend[i]; pend[i] = null; clip[i] = null; load(i, c, lead[i]); } },
+          onReady: function () { p.mute(); ready[i] = true; if (pend[i]) { var c = pend[i]; pend[i] = null; load(i, c); } },
           onStateChange: function (e) {
             if (e.data === 1) since[i] = since[i] || Date.now();
             else if (e.data !== 3) since[i] = 0;
             // a waiting shot got paused by the browser: start it again right away
             if (e.data === 2 && role[i] === 'prep' && !document.hidden) { p.playVideo(); poke[i] = Date.now(); }
             // a shown video stopped for some reason: take it away at once, so a pause sign never shows
-            if (e.data !== 1 && e.data !== 3 && role[i] === 'show' && layers[i].classList.contains('on')) cut(i);
+            if (e.data !== 1 && e.data !== 3 && role[i] === 'show' && i === cur) cut(i);
           }
         }
       });
     })(i);
   };
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) { off = false; fails = 0; } });
-  load(0, SEQ[1].c, FIRST); cur = N - 1; // the very first shot comes in a little earlier with a slower fade, so the first photo does not wait long
-  step();
-  var s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s);
+  load(0, SHOTS[0]);
+  shown = PHOTOS[0]; pi = 1; photo(shown, true); timer = setTimeout(boundary, HOLD); // the sunset photo is already there on load: its full second, then the rhythm starts
+  var sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc);
 })();
 </script>
 <script>
