@@ -786,6 +786,19 @@
   .top-bg .slide.on { opacity: 1; filter: blur(0); z-index: 2; }
   .top-bg .slide.prev { opacity: 1; filter: blur(0); z-index: 1; }
   @media (prefers-reduced-motion: reduce) { .top-bg .slide { filter: none; transition: none; } }
+  /* v70: Anja picked design 7, a round Register Online badge with words turning slowly around it. Before: version-70-before-round-badge.html */
+  .closing .cta-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: center; }
+  .closing .cta-side p.sub { margin-bottom: 18px; }
+  .closing .cta-side .tel { color: var(--ink); font-weight: 600; font-size: .92rem; text-decoration: none; border-bottom: 1px solid rgba(30,43,27,.4); padding-bottom: 2px; transition: color .25s, border-color .25s; }
+  .closing .cta-side .tel:hover { color: var(--green-deep); border-color: var(--green-deep); }
+  .closing .badge { position: relative; width: 168px; height: 168px; display: block; color: var(--ink); text-decoration: none; }
+  .closing .badge svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: badge-spin 22s linear infinite; }
+  .closing .badge svg.ring text { font: 500 10.5px var(--sans); letter-spacing: .3em; text-transform: uppercase; fill: var(--ink); }
+  .closing .badge .mid { position: absolute; inset: 30px; border-radius: 50%; background: var(--ink); color: #f4f1eb; display: grid; place-items: center; text-align: center; font: italic 400 1.35rem/1.05 var(--serif); transition: background .3s, transform .4s; }
+  .closing .badge:hover .mid { background: var(--green-deep); transform: scale(1.05); }
+  @keyframes badge-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .closing .badge svg.ring { animation: none; } }
+  @media (max-width: 560px) { .closing .cta-side { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body class="home">
@@ -911,13 +924,12 @@
         <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
       </div>
     </div>
-    <div class="cta-side">
+    <div class="cta-side"><div>
       <h2>Interested in <em>hosting</em>?</h2>
       <p class="sub">Register online for more information, with no obligation. An NWSE coordinator will contact you to answer your questions and talk about the next steps.</p>
-      <div class="ctas">
-        <a class="btn" href="#" data-href="host.html#register">Register Online</a>
-        <a class="btn line" href="tel:+18778503312">Call (877) 850-3312</a>
-      </div>
+      <a class="tel" href="tel:+18778503312">Call (877) 850-3312</a>
+    </div>
+    <a class="badge" href="#" data-href="host.html#register" aria-label="Register Online"><svg class="ring" viewBox="0 0 168 168" aria-hidden="true"><defs><path id="badge-ring" d="M84,84 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><text><textPath href="#badge-ring">Register online · no obligation · Register online · no obligation ·</textPath></text></svg><span class="mid">Register<br>Online</span></a>
     </div>
     </div>
   </section>
