@@ -809,6 +809,8 @@
   /* v77: the three paragraphs under "an open home" all look the same (same font, size, color and spacing) */
   .closing .open-row p, .closing .open-row p.dont { font: 400 .98rem/1.75 var(--sans); font-style: normal; color: var(--soft); max-width: 30rem; margin: 0; letter-spacing: 0; }
   .closing .open-row p + p { margin-top: 12px; }
+  /* v78: "an open home" in the same weight as "hosting" (it was a thin 300, which made the same dark green look lighter) */
+  .closing .open-row h2 { font-weight: 400; color: var(--ink); }
 </style>
 </head>
 <body class="home">
