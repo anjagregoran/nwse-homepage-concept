@@ -306,3 +306,26 @@ header.solid nav.nc::before { color: #6f9020; }
   .perks { flex-direction: column; align-items: center; gap: 14px; }
   .perks li + li { border-left: 0; }
 }
+
+/* v14: slogan back under the logo (bigger, white over the photo, dark when the bar turns light), small language switch next to Register Online.
+   Before: backups-pages/pages-v14-before-logo-slogan.css */
+nav.nc { padding-top: 0; }
+nav.nc::before { content: none; display: none; }
+.logo .tagline { display: block; margin-left: 47px; font: 400 18px/1 "Italiana", serif; letter-spacing: .05em; color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,.35); white-space: nowrap; }
+header.solid .logo .tagline { color: var(--ink); text-shadow: none; }
+@media (min-width: 861px) and (max-width: 1120px) { .logo .tagline { margin-left: 41px; font-size: 15px; } }
+@media (max-width: 860px) { .logo .tagline { margin-left: 38px; font-size: 14px; } }
+.nr { display: flex; align-items: center; gap: 18px; }
+.lang { position: relative; }
+.lang-btn { display: flex; align-items: center; gap: 7px; background: none; border: 0; padding: 8px 2px; cursor: pointer; font: 500 .74rem/1 "Instrument Sans", Arial, sans-serif; letter-spacing: .14em; color: #f4f1eb; }
+header.solid .lang-btn { color: var(--ink); }
+.lang-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.lang-menu { position: absolute; right: 0; top: calc(100% + 12px); z-index: 60; min-width: 170px; padding: 8px; background: #fbf9f4; border-radius: 4px; box-shadow: 0 18px 40px rgba(20,26,18,.16);
+  opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .2s, transform .2s, visibility .2s; }
+.lang.open .lang-menu { opacity: 1; visibility: visible; transform: none; }
+.lang-menu a { display: block; padding: 11px 14px; border-radius: 2px; color: #1e2b1b; text-decoration: none; font: 500 .9rem/1.2 "Instrument Sans", Arial, sans-serif; letter-spacing: 0; text-transform: none; }
+.lang-menu a:hover { background: rgba(30,43,27,.06); }
+.lang-menu a.cur { color: #7d8577; }
+@media (max-width: 860px) { .nr { gap: 10px; } .lang-btn span { display: none; } }
+.nr { margin-left: 28px; }
+@media (min-width: 861px) and (max-width: 1240px) { .lang-btn span { display: none; } .nr { margin-left: 16px; gap: 12px; } }

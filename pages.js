@@ -12,6 +12,15 @@
   reg.querySelectorAll('.reg-menu a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
 
+  // language switch
+  var l = document.querySelector('.lang');
+  if (l) { var lb = l.querySelector('.lang-btn');
+    var ls = function (o) { l.classList.toggle('open', o); lb.setAttribute('aria-expanded', o ? 'true' : 'false'); };
+    lb.addEventListener('click', function (e) { e.stopPropagation(); ls(!l.classList.contains('open')); });
+    document.addEventListener('click', function (e) { if (!l.contains(e.target)) ls(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ls(false); });
+    l.querySelector('a.cur').addEventListener('click', function (e) { e.preventDefault(); ls(false); }); }
+
   // preview only: the form just shows the thank-you note, nothing is sent anywhere
   document.querySelectorAll('form.mini').forEach(function (f) {
     f.addEventListener('submit', function (e) { e.preventDefault(); f.classList.add('done'); });
