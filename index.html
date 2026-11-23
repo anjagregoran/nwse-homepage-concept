@@ -1071,7 +1071,7 @@ document.addEventListener('click', function (e) {
     // photo, shot, photo, shot: only one video ever gets ready at a time (two at once makes the second freeze for ~5 s).
     // The three parts of the car shot are kept far apart.
   ];
-  var LEAD = 3.7, FIRST = 3, POKE = 3600, PHOTO = 1700, FADE = 1000, OUT = 650, WAIT = 10000, N = 3, L = SEQ.length;
+  var LEAD = 3.7, FIRST = 3, POKE = 3600, PHOTO = 1700, FADE = 1000, OUT = 650, WAIT = 7000, N = 3, L = SEQ.length;
   var slides = [].slice.call(document.querySelectorAll('.top-bg .slide')), box = document.querySelector('.top-video'),
       layers = box.querySelectorAll('.vl'), P = [], ready = [], lead = [], clip = [], role = [], since = [], pend = [], stall = [], poke = [],
       cur = N - 1, k = 0, timer, waiting = false, fails = 0, off = false, firstPhoto = true, firstShow = true;
@@ -1184,7 +1184,7 @@ document.addEventListener('click', function (e) {
         timer = setTimeout(advance, Math.max(800, ms - OUT)); // starts fading to the photo just before the shot ends
         return;
       }
-      if (Date.now() - t0 > WAIT) { waiting = false; if (ready[u]) P[u].pauseVideo(); role[u] = 'idle'; if (++fails >= 2) off = true; advance(); return; }
+      if (Date.now() - t0 > WAIT) { waiting = false; if (ready[u]) P[u].pauseVideo(); role[u] = 'idle'; if (document.hidden) off = true; advance(); return; } // a late shot is skipped; videos only rest while nobody can see the page
       timer = setTimeout(poll, 100);
     })();
   }
