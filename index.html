@@ -1075,11 +1075,10 @@ document.addEventListener('click', function (e) {
   var V6 = '1DHX-Fgk8RE', V3 = '3yiepRetCw4';
   // [video, start s, end s]. Times measured on the real player, each one a single scene. The three car parts are kept apart.
   var SHOTS = [
-    [V6, 78.5, 81.3],     // car 1 of 3: laughing in front of the camera
+    [V6, 78.5, 81.6],     // car, first half: laughing in front of the camera with sunglasses (3.1 s)
     [V3, 97.8, 99.6],     // hiker above the canyon, arms up
-    [V6, 82.0, 84.1],     // car 2 of 3: dancing in her seat
     [V6, 73.5, 75.5],     // hot air balloon, everyone in the basket
-    [V6, 84.3, 86.0],     // car 3 of 3: laughing, leaning back in the chair
+    [V6, 82.0, 86.0],     // car, second half: dancing, then laughing and leaning back in the chair (4 s, kept apart from the first half)
     [V6, 142.2, 144.2]    // school stage show, the dancing
   ];
   var PHOTOS = [0, 3, 1, 2]; // sunset friends first, then the NWSE photos, round and round
@@ -1153,9 +1152,9 @@ document.addEventListener('click', function (e) {
     setTimeout(function () { if (cur === u && box.classList.contains('on')) photo(nextPhoto(), true); }, F + 100);
     // the next shot starts getting ready right away (hidden)
     s = (s + 1) % SHOTS.length; nx = (u + 1) % N; load(nx, SHOTS[s]);
-    // fade in, a full second, then fade out, always finished before the shot ends
+    // v59: a video plays its whole moment (photos keep their 1 second), and has faded out just before the shot ends
     var left = (c[2] - P[u].getCurrentTime()) * 1000 - F - 80;
-    timer = setTimeout(function () { hideVideo(); timer = setTimeout(boundary, SLOT); }, Math.max(F + 300, Math.min(SLOT, left)));
+    timer = setTimeout(function () { hideVideo(); timer = setTimeout(boundary, SLOT); }, Math.max(F + 300, left));
   }
 
   window.onYouTubeIframeAPIReady = function () {
