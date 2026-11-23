@@ -806,6 +806,9 @@
   .closing .open-row p { font-size: .96rem; max-width: 30rem; }
   /* v76: "hosting" in the same dark green as "an open home" and the Register circle */
   .closing .cta-side h2 em { color: var(--ink); }
+  /* v77: the three paragraphs under "an open home" all look the same (same font, size, color and spacing) */
+  .closing .open-row p, .closing .open-row p.dont { font: 400 .98rem/1.75 var(--sans); font-style: normal; color: var(--soft); max-width: 30rem; margin: 0; letter-spacing: 0; }
+  .closing .open-row p + p { margin-top: 12px; }
 </style>
 </head>
 <body class="home">
