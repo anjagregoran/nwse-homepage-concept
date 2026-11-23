@@ -756,6 +756,15 @@
   }
   body.home .top .teaser small { color: #626b5d; }
   body.home .top .teaser em { color: #4f584b; }
+  /* v57: "All you need: an open home" moved into the bottom hosting section, heading on the left, text on the right with a thin line, then the hosting call to action */
+  .closing .open-row { max-width: 1120px; margin: 0 auto clamp(56px, 6vw, 80px); display: grid; grid-template-columns: auto minmax(0, 34rem); justify-content: space-between; align-items: center; gap: clamp(36px, 5vw, 90px); text-align: left; padding-bottom: clamp(56px, 6vw, 80px); border-bottom: 1px solid rgba(30,43,27,.14); }
+  .closing .open-row h2 { font: 400 clamp(1.4rem, 2.3vw, 2.2rem)/1.25 var(--serif); letter-spacing: .14em; text-transform: uppercase; margin: 0; max-width: none; white-space: nowrap; }
+  .closing .open-row h2 em { text-transform: none; letter-spacing: .06em; color: var(--green-deep); }
+  .closing .open-row .txt { border-left: 1px solid rgba(30,43,27,.3); padding: 4px 0 4px clamp(22px, 2.4vw, 34px); }
+  .closing .open-row p { margin: 0; color: var(--soft); font-size: .98rem; line-height: 1.75; }
+  .closing .open-row p + p { margin-top: 10px; }
+  .closing .open-row p.dont { font: italic 400 clamp(1.15rem, 1.5vw, 1.35rem)/1.4 var(--serif); color: var(--ink); margin-bottom: 14px; }
+  @media (max-width: 900px) { .closing .open-row { grid-template-columns: 1fr; gap: 26px; } .closing .open-row h2 { white-space: normal; } }
 </style>
 </head>
 <body class="home">
@@ -800,17 +809,6 @@
     <feBlend mode="screen" in="r2" in2="g" result="rg"/><feBlend mode="screen" in="rg" in2="b2"/></filter></svg>
 
   <ul class="values"><li>Since 1987</li><li>U.S. Dept. of State designated</li><li>CSIET listed</li><li>Local coordinators</li><li>Semester and school year</li></ul>
-
-  <div class="statement open-home">
-    <div class="wrap">
-      <h2>All you need: <em>an open home</em></h2>
-      <div class="txt">
-      <p class="dont">You don’t have to have children. You don’t have to travel.</p>
-      <p>You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
-      <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
-      </div>
-    </div>
-  </div>
 
   <section id="ways">
     <div class="wrap">
@@ -884,6 +882,14 @@
   </section>
 
   <section class="closing" id="register">
+    <div class="open-row">
+      <h2>All you need: <em>an open home</em></h2>
+      <div class="txt">
+        <p class="dont">You don’t have to have children. You don’t have to travel.</p>
+        <p>You simply need to be willing to open your home, share your daily life and learn from another culture.</p>
+        <p>Open the door to international friendships that last a lifetime. Share your culture, get to know a student from another country and experience the world without leaving home.</p>
+      </div>
+    </div>
     <div class="wrap">
       <h2>Interested in <em>hosting</em>?</h2>
       <p class="sub">Register online for more information, with no obligation. An NWSE coordinator will contact you to answer your questions and talk about the next steps.</p>
@@ -1166,6 +1172,8 @@ document.addEventListener('click', function (e) {
       if (ready[cur] && role[cur] === 'show' && seen(cur)) fadeAway(box, cur);
       photo(it.p); hideVideo();
       var was = cur; setTimeout(function () { if (!seen(was) && ready[was] && role[was] === 'show') { layers[was].classList.remove('on'); P[was].pauseVideo(); role[was] = 'idle'; } }, FADE + 400);
+      // first visit: the sunset photo only stays a moment, then another photo while the first video gets ready
+      if (firstPhoto) setTimeout(function () { if (!box.classList.contains('on')) photo(3); }, 1400);
       var hold = firstPhoto ? 600 : PHOTO; firstPhoto = false;
       if (!off) plan(k, cur, hold, 1);
       timer = setTimeout(advance, hold);
